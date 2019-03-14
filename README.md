@@ -17,6 +17,8 @@ Goal of this edit:
 - Trim the algo options so that eval_1 is =1, since the others aren't necessary for this project.
   * algo = 1 is now the 'Best move, n moves ahead, minimax with alpha beta pruning (Faster)' option
   * else is now 'random move' option, for when a number other than the valid options is chosen
+  
+- Add details to the 'game over' text
 
 Note: Main will need to be updated to add in eval_2 and eval_3 to the move generator once they are implemented.
 
