@@ -46,7 +46,7 @@ The computer is currently set to look 3 moves ahead using minimax with alpha bet
 If you'd like to have the computer play the computer, you can do so with this command in your browser's console, setting the algorithm you'd like to use, and each computer player's 'skill' level.
 
 ```
-playGame(algoW=4, skillW=2, algoB=4, skillB=2)
+playGame(algoW=1, skillW=2, algoB=1, skillB=2)
 // algo=
 // 0 - randomly chooses and evaluation strategy from the numbered ones below to use for the entire game
 // 1 - Best move, n moves ahead, minimax with alpha beta pruning (Faster)
