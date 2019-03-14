@@ -12,6 +12,8 @@ Goal of this edit:
 
 - Trim the algo options so that eval_1 is =1, since the others aren't necessary for this project.
 
+Note: Main will need to be updated to add in eval_2 and eval_3 to the move generator once they are implemented.
+
 
 # Chess AI
 A chess AI, with with different algorithms of increasing intelligence.
