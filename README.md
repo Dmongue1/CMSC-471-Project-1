@@ -9,8 +9,12 @@ Goal of this edit:
   
 - Allow for randomization of algorithms and depths
   * Random option = 0
+  * randomization happens in playGame() when first called, once set to a random option it stays consitent throughout that game
+  * Sets the chosen variable to a random int 1-3 for skill, and 1 for algo (needs to be updated once evals 2 & 3 implemented)
 
 - Trim the algo options so that eval_1 is =1, since the others aren't necessary for this project.
+  * algo = 1 is now the 'Best move, n moves ahead, minimax with alpha beta pruning (Faster)' option
+  * else is now 'random move' option
 
 Note: Main will need to be updated to add in eval_2 and eval_3 to the move generator once they are implemented.
 
@@ -57,10 +61,8 @@ If you'd like to have the computer play the computer, you can do so with this co
 ```
 playGame(algoW=4, skillW=2, algoB=4, skillB=2)
 // algo=
-// 1 - random
-// 2 - Best move, one move ahead
-// 3 - Best move, n moves ahead, minimax
-// 4 - Best move, n moves ahead, minimax with alpha beta pruning (Faster)
+// 1 - Best move, n moves ahead, minimax with alpha beta pruning (Faster)
+// other - random move
 // skillW and skillB are how many moves ahead to look
 ```
 
