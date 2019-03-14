@@ -9,7 +9,7 @@ var makeMove = function(algo, skill=3) {
   if (algo === 1) {
     var move = calcBestMove(skill, game, game.turn())[1];
     /*
-  } else if (algo === 2) {
+  } else if (algo === 2) {  //<-------------------------------------------------------------change once other evals implemented
     var move = calcBestMoveOne(game.turn());
   } else if (algo === 3) {
     var move = calcBestMoveNoAB(skill, game, game.turn())[1];
@@ -42,7 +42,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   var sB_Random = false;
 
   if (algoW === 0){
-    algoW = 1;
+    algoW = 1; //<----------------------------------------------------------------------------change once other evals implemented
     aW_Random = true;
   }
   if (skillW === 0){
@@ -51,7 +51,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     sW_Random = true;
   }
   if (algoB === 0){
-    algoB = 1;
+    algoB = 1;  //<---------------------------------------------------------------------------change once other evals implemented
     aB_Random = true;
   }
   if (skillB === 0){
@@ -60,9 +60,18 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   }
 
   //re-randomizer for when two random or semirandom players are identical
-  if (algoW === algoB && skillW === skillB){
-    if (aW_Random || sW_Random || aB_Random || sB_Random){
-      
+  if (aW_Random || sW_Random || aB_Random || sB_Random){
+    //loop in case re-randomization gives same values as initial randomization
+    while (algoW === algoB && skillW === skillB){
+      if (aW_Random){
+        //algoW = Math.floor((Math.random() * 3) +1);  <------------------------------------change once other evals implemented
+      } else if (aB_Random){
+        //algoB = Math.floor((Math.random() * 3) +1);  <------------------------------------change once other evals implemented
+      } else if (sW_Random){
+        skillW = Math.floor((Math.random() * 3) +1);
+      } else {
+        skillB = Math.floor((Math.random() * 3) +1);
+      }
     }
   }
   
