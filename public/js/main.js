@@ -27,7 +27,9 @@ var makeMove = function(algo, skill=3) {
 var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   if (game.game_over() === true) {
     console.log('game over');
-    //  \n' + 'White: algo=' + algoW + ' skill=' + skillW + ' Black: algo=' + algoB + ' skill=' skillB
+    console.log('White: algo=' + algoW + ' skill=' + skillW);
+    console.log('Black: algo=' + algoB + ' skill=' + skillB);
+    //  \n' + 'White: algo=' + algoW + ' skill=' + skillW + ' Black: algo=' + algoB + ' skill=' + skillB
     return;
   }
   //randomizers for algo and skill, run once at start of game
@@ -45,10 +47,8 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   if (skillB === 0){
     skillB = Math.floor((Math.random() * 3) +1);
   }
-  console.log(algoW);
-  console.log(skillW);
-  console.log(algoB);
-  console.log(skillB);
+  console.log('White: algo=' + algoW + ' skill=' + skillW);
+  console.log('Black: algo=' + algoB + ' skill=' + skillB);
   
   var skill = game.turn() === 'w' ? skillW : skillB;
   var algo = game.turn() === 'w' ? algoW : algoB;
