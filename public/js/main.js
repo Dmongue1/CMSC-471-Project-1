@@ -22,15 +22,16 @@ var makeMove = function(algo, skill=3) {
 }
 
 // Computer vs Computer
-var playGame = function(algo=4, skillW=2, skillB=2) {
+var playGame = function(algoW, skillW, algoB, skillB) {
   if (game.game_over() === true) {
     console.log('game over');
     return;
   }
   var skill = game.turn() === 'w' ? skillW : skillB;
+  var algo = game.turn() === 'w' ? algoW : algoB;
   makeMove(algo, skill);
   window.setTimeout(function() {
-    playGame(algo, skillW, skillB);
+    playGame(algoW, skillW, algoB, skillB);
   }, 250);
 };
 
