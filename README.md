@@ -18,8 +18,8 @@ Goal of this edit:
   * algo = 1 is now the 'Best move, n moves ahead, minimax with alpha beta pruning (Faster)' option
   * else is now 'random move' option, for when a number other than the valid options is chosen
   
-- Add details to the 'game over' text
-  * playGame() now also prints section showing algos and skill used by both players (after randomization if specified)
+- Add details to the text
+  * playGame() now also prints section showing algos and skill used by both players (after randomization if specified) to the console at the start and end of game
 
 Note: Main will need to be updated to add in eval_2 and eval_3 to the move generator once they are implemented.
 
