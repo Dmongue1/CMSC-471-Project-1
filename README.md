@@ -1,3 +1,9 @@
+Goal of this edit: 
+- Alter the Computer vs Computer code to allow for opponents to use different algorithms
+- Allow for randomization of algorithms and depths
+- Trim the algo options so that eval_1 is =1, since the others aren't necessary for this project.
+
+
 # Chess AI
 A chess AI, with with different algorithms of increasing intelligence.
 
