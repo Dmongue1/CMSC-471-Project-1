@@ -21,8 +21,9 @@ Goal of this edit:
 Note: Main will need to be updated to add in eval_2 and eval_3 to the move generator once they are implemented.
 
 Testing comments:
- - Running playGame() with no arguments seems to be working as intended
+ - Running playGame() with no arguments seems to be working as intended, works just like playGame(1,2,1,2)
  - playGame(1,1,1,1) seems to also work, less CPU intensive due to the shallower depth
+ - playGame(1,3,1,3) also works, although was very slow and CPU intensive due to the high depth. Took about 10 minutes to complete.
 
 
 # Chess AI
