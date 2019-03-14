@@ -1,11 +1,3 @@
-v2 notes:
-Editing main.js
-
-Goals of this edit: 
- - Add re-randomization if randomized players end up identical
- - Add end-game check to see who won or if it was a stalemate
- - Add turn counter
-
 # Chess AI
 A chess AI, with with different algorithms of increasing intelligence.
 
