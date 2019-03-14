@@ -3,9 +3,9 @@ Editing main.js
 Goal of this edit: 
 
 - Alter the Computer vs Computer code to allow for opponents to use different algorithms
-  * Changed Computer vs Computer playGame() function to take 4 arguments
+  * Changed Computer vs Computer playGame() function to take 4 arguments (see below for algo code number changes)
   
-     playGame(algo=4, skillW=2, skillB=2) -> playgame(algoW=4, skillW=2, algoB=4, skillB=2)
+     playGame(algo=4, skillW=2, skillB=2) -> playgame(algoW=1, skillW=2, algoB=1, skillB=2)
   * Allows user to set different algorithms for each opponent
   * Added line to check whose turn it is next, and pass along which algo should be used to the move generator, the same way skill was passed along in the original code
   
