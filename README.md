@@ -8,6 +8,7 @@ Goal of this edit:
   * Added line to check whose turn it is next, and pass along which algo should be used to the move generator, the same way skill was passed along in the original code
   
 - Allow for randomization of algorithms and depths
+ * Random option = 0
 
 - Trim the algo options so that eval_1 is =1, since the others aren't necessary for this project.
 
