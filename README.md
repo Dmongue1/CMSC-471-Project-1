@@ -8,7 +8,7 @@ Goal of this edit:
   * Added line to check whose turn it is next, and pass along which algo should be used to the move generator, the same way skill was passed along in the original code
   
 - Allow for randomization of algorithms and depths
-  * Random option = 0
+  * Random option for algo and skill variables is 0
   * randomization happens in playGame() when first called, once set to a random option it stays consitent throughout that game
   * Sets the chosen variable to a random int 1-3 for skill, and 1 for algo (needs to be updated once evals 2 & 3 implemented)
 
@@ -61,8 +61,9 @@ If you'd like to have the computer play the computer, you can do so with this co
 ```
 playGame(algoW=4, skillW=2, algoB=4, skillB=2)
 // algo=
+// 0 - randomly chooses and evaluation strategy from the numbered ones below to use for the entire game
 // 1 - Best move, n moves ahead, minimax with alpha beta pruning (Faster)
-// other - random move
+// other - random move (else case)
 // skillW and skillB are how many moves ahead to look
 ```
 
