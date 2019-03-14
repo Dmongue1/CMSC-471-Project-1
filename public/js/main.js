@@ -32,21 +32,42 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     //  \n' + 'White: algo=' + algoW + ' skill=' + skillW + ' Black: algo=' + algoB + ' skill=' + skillB
     return;
   }
+  
   //randomizers for algo and skill, run once at start of game
   //algo randomizers need to be implemented once other evals are implemented
-  if (algoW === 0){
-    algoW = 1;
+  
+  //check if randomization necessary, so re-randomizer doesn't affect user-specified values
+  if (algoW === 0 || skillW === 0 || algoB ===0 || skillB ===0){    
+    //booleans for which pieces are randomized
+    var aW = false;
+    var sW = false;
+    var aB = false;
+    var sB = false;
+    
+    if (algoW === 0){
+      algoW = 1;
+      //aW = true;
+    }
+    if (skillW === 0){
+      //sets skill to a random int between 1 and 3
+      skillW = Math.floor((Math.random() * 3) +1);
+      sW = true;
+    }
+    if (algoB === 0){
+      algoB = 1;
+      //aB = true;
+    }
+    if (skillB === 0){
+      skillB = Math.floor((Math.random() * 3) +1);
+      sB = true
+    }
+    
+    //re-randomizer for when two random players are identical
+    if (algoW === algoB && skillW === skillB){
+      
+    }
   }
-  if (skillW === 0){
-    //sets skill to a random int between 1 and 3
-    skillW = Math.floor((Math.random() * 3) +1);
-  }
-  if (algoB === 0){
-    algoB = 1;
-  }
-  if (skillB === 0){
-    skillB = Math.floor((Math.random() * 3) +1);
-  }
+  
   console.log('White: algo=' + algoW + ' skill=' + skillW);
   console.log('Black: algo=' + algoB + ' skill=' + skillB);
   
