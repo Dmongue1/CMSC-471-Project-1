@@ -1,6 +1,14 @@
 Goal of this edit: 
+
 - Alter the Computer vs Computer code to allow for opponents to use different algorithms
+  -- Changed Computer vs Computer playGame() function to take 4 arguments
+     playGame(algo=4, skillW=2, skillB=2) -> playgame(algoW, skillW, algoB, skillB)
+  -- Allows user to set different algorithms for each opponent
+  -- Allows user to set algorithm and depth manually
+  -- Requires user to specify all 4 when calling
+  
 - Allow for randomization of algorithms and depths
+
 - Trim the algo options so that eval_1 is =1, since the others aren't necessary for this project.
 
 
