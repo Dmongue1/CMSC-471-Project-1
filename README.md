@@ -19,7 +19,7 @@ Goal of this edit:
   * else is now 'random move' option, for when a number other than the valid options is chosen
   
 - Add details to the 'game over' text
-  <s>* playGame() 'game over' block now also prints section showing algos and skill used by both players</s>
+  <s>* playGame() now also prints section showing algos and skill used by both players (after randomization if specified)</s>
 
 Note: Main will need to be updated to add in eval_2 and eval_3 to the move generator once they are implemented.
 
