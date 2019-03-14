@@ -5,7 +5,7 @@ Goal of this edit:
   
      playGame(algo=4, skillW=2, skillB=2) -> playgame(algoW=4, skillW=2, algoB=4, skillB=2)
   * Allows user to set different algorithms for each opponent
-  * Added line to check whose turn it is next, and pass along which algo should be used to the move generator, the same way skill was in the original code
+  * Added line to check whose turn it is next, and pass along which algo should be used to the move generator, the same way skill was passed along in the original code
   
 - Allow for randomization of algorithms and depths
 
