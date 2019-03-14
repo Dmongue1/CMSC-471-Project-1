@@ -22,7 +22,7 @@ var makeMove = function(algo, skill=3) {
 }
 
 // Computer vs Computer
-var playGame = function(algoW, skillW, algoB, skillB) {
+var playGame = function(algoW=4, skillW=2, algoB=4, skillB=2) {
   if (game.game_over() === true) {
     console.log('game over');
     return;
