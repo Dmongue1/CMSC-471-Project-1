@@ -25,10 +25,6 @@ var makeMove = function(algo, skill=3) {
 
 // Computer vs Computer
 var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
-  console.log(algoW);
-  console.log(skillW);
-  console.log(algoB);
-  console.log(skillB);
   if (game.game_over() === true) {
     console.log('game over');
     //  \n' + 'White: algo=' + algoW + ' skill=' + skillW + ' Black: algo=' + algoB + ' skill=' skillB
@@ -49,6 +45,10 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   if (skillB === 0){
     skillB = Math.floor((Math.random() * 3) +1);
   }
+  console.log(algoW);
+  console.log(skillW);
+  console.log(algoB);
+  console.log(skillB);
   
   var skill = game.turn() === 'w' ? skillW : skillB;
   var algo = game.turn() === 'w' ? algoW : algoB;
