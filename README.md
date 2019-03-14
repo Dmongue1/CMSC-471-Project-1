@@ -9,7 +9,7 @@ Goal of this edit:
   
 - Allow for randomization of algorithms and depths
   * Random option for algo and skill variables is 0
-  * randomization happens in playGame() when first called, once set to a random option it stays consitent throughout that game
+  * randomization happens in playGame() when first called, once set to a random option it stays that option throughout that game
   * Sets the chosen variable to a random int 1-3 for skill, and 1 for algo (needs to be updated once evals 2 & 3 implemented)
 
 - Trim the algo options so that eval_1 is =1, since the others aren't necessary for this project.
