@@ -27,8 +27,6 @@ var makeMove = function(algo, skill=3) {
 var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   if (game.game_over() === true) {
     console.log('game over');
-    console.log('White: algo=' + algoW + ' skill= ' skillW);
-    console.log('Black: algo=' + algoB + ' skill= ' skillB);
     return;
   }
   //randomizers for algo and skill, run once at start of game
