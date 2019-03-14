@@ -26,7 +26,7 @@ var makeMove = function(algo, skill=3) {
 // Computer vs Computer
 var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   if (game.game_over() === true) {
-    console.log('game over');
+    console.log('game over \n' + 'White: algo=' + algoW + ' skill=' + skillW);
     return;
   }
   //randomizers for algo and skill, run once at start of game
