@@ -20,6 +20,9 @@ Goal of this edit:
 
 Note: Main will need to be updated to add in eval_2 and eval_3 to the move generator once they are implemented.
 
+Testing comments:
+ - Running playGame() with no arguments seems to be working as intended
+
 
 # Chess AI
 A chess AI, with with different algorithms of increasing intelligence.
