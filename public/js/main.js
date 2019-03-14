@@ -29,41 +29,39 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     console.log('game over');
     console.log('White: algo=' + algoW + ' skill=' + skillW);
     console.log('Black: algo=' + algoB + ' skill=' + skillB);
-    //  \n' + 'White: algo=' + algoW + ' skill=' + skillW + ' Black: algo=' + algoB + ' skill=' + skillB
     return;
   }
   
   //randomizers for algo and skill, run once at start of game
   //algo randomizers need to be implemented once other evals are implemented
   
-  //check if randomization necessary, so re-randomizer doesn't affect user-specified values
-  if (algoW === 0 || skillW === 0 || algoB ===0 || skillB ===0){    
-    //booleans for which pieces are randomized
-    var aW = false;
-    var sW = false;
-    var aB = false;
-    var sB = false;
-    
-    if (algoW === 0){
-      algoW = 1;
-      //aW = true;
-    }
-    if (skillW === 0){
-      //sets skill to a random int between 1 and 3
-      skillW = Math.floor((Math.random() * 3) +1);
-      sW = true;
-    }
-    if (algoB === 0){
-      algoB = 1;
-      //aB = true;
-    }
-    if (skillB === 0){
-      skillB = Math.floor((Math.random() * 3) +1);
-      sB = true
-    }
-    
-    //re-randomizer for when two random players are identical
-    if (algoW === algoB && skillW === skillB){
+  //booleans for which pieces are randomized, so user-specified values won't be affected by the re-randomizer
+  var aW_Random = false;
+  var sW_Random = false;
+  var aB_Random = false;
+  var sB_Random = false;
+
+  if (algoW === 0){
+    algoW = 1;
+    aW_Random = true;
+  }
+  if (skillW === 0){
+    //sets skill to a random int between 1 and 3
+    skillW = Math.floor((Math.random() * 3) +1);
+    sW_Random = true;
+  }
+  if (algoB === 0){
+    algoB = 1;
+    aB_Random = true;
+  }
+  if (skillB === 0){
+    skillB = Math.floor((Math.random() * 3) +1);
+    sB_Random = true
+  }
+
+  //re-randomizer for when two random or semirandom players are identical
+  if (algoW === algoB && skillW === skillB){
+    if (aW_Random || sW_Random || aB_Random || sB_Random){
       
     }
   }
