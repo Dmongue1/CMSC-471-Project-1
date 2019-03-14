@@ -1,3 +1,5 @@
+Editing main.js
+
 Goal of this edit: 
 
 - Alter the Computer vs Computer code to allow for opponents to use different algorithms
