@@ -28,6 +28,7 @@ Testing comments:
  - Running playGame() with no arguments seems to be working as intended, works just like playGame(1,2,1,2)
  - playGame(1,1,1,1) seems to also work, less CPU intensive due to the shallower depth
  - playGame(1,3,1,3) also works, although was very slow and CPU intensive due to the high depth. Took about 10 minutes to complete.
+ - playGame(1,0,1,0) works too, randomization seemes to be working as intended. White got a skill=3, Black got a skill=1. It was interesting seeing the difference in response times and strength of play.
 
 
 # Chess AI
