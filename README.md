@@ -1,3 +1,36 @@
+Editing main.js
+
+Goal of this edit: 
+
+- Alter the Computer vs Computer code to allow for opponents to use different algorithms
+  * Changed Computer vs Computer playGame() function to take 4 arguments (see below for algo code number changes)
+  
+     playGame(algo=4, skillW=2, skillB=2) -> playgame(algoW=1, skillW=2, algoB=1, skillB=2)
+  * Allows user to set different algorithms for each opponent
+  * Added line to check whose turn it is next, and pass along which algo should be used to the move generator, the same way skill was passed along in the original code
+  
+- Allow for randomization of algorithms and depths
+  * Random option for algo and skill variables is 0
+  * randomization happens in playGame() when first called, once set to a random option it stays that option throughout that game
+  * Sets the chosen variable to a random int 1-3 for skill, and 1 for algo (needs to be updated once evals 2 & 3 implemented)
+
+- Trim the algo options so that eval_1 is =1, since the others aren't necessary for this project.
+  * algo = 1 is now the 'Best move, n moves ahead, minimax with alpha beta pruning (Faster)' option
+  * else is now 'random move' option, for when a number other than the valid options is chosen
+  
+- Add details to the text
+  * playGame() now also prints section showing algos and skill used by both players (after randomization if specified) to the console at the start and end of game
+  * For use in games with random algos and depths
+
+Note: Main will need to be updated to add in eval_2 and eval_3 to the move generator once they are implemented.
+
+Testing comments:
+ - Running playGame() with no arguments seems to be working as intended, works just like playGame(1,2,1,2)
+ - playGame(1,1,1,1) seems to also work, less CPU intensive due to the shallower depth
+ - playGame(1,3,1,3) also works, although was very slow and CPU intensive due to the high depth. Took about 10 minutes to complete.
+ - playGame(1,0,1,0) works too, randomization seemes to be working as intended. White got a skill=3, Black got a skill=1. It was interesting seeing the difference in response times and strength of play.
+
+
 # Chess AI
 A chess AI, with with different algorithms of increasing intelligence.
 
@@ -38,12 +71,11 @@ The computer is currently set to look 3 moves ahead using minimax with alpha bet
 If you'd like to have the computer play the computer, you can do so with this command in your browser's console, setting the algorithm you'd like to use, and each computer player's 'skill' level.
 
 ```
-playGame(algo=4, skillW=2, skillB=2)
+playGame(algoW=4, skillW=2, algoB=4, skillB=2)
 // algo=
-// 1 - random
-// 2 - Best move, one move ahead
-// 3 - Best move, n moves ahead, minimax
-// 4 - Best move, n moves ahead, minimax with alpha beta pruning (Faster)
+// 0 - randomly chooses and evaluation strategy from the numbered ones below to use for the entire game
+// 1 - Best move, n moves ahead, minimax with alpha beta pruning (Faster)
+// other - random move (else case)
 // skillW and skillB are how many moves ahead to look
 ```
 

@@ -2,18 +2,20 @@
 var makeMove = function(algo, skill=3) {
   // exit if the game is over
   if (game.game_over() === true) {
-    console.log('game over');
+    console.log('Game Over');
     return;
   }
   // Calculate the best move, using chosen algorithm
   if (algo === 1) {
-    var move = randomMove();
+    var move = calcBestMove(skill, game, game.turn())[1];
+    /*
   } else if (algo === 2) {
     var move = calcBestMoveOne(game.turn());
   } else if (algo === 3) {
     var move = calcBestMoveNoAB(skill, game, game.turn())[1];
+    */
   } else {
-    var move = calcBestMove(skill, game, game.turn())[1];
+    var move = randomMove();
   }
   // Make the calculated move
   game.move(move);
@@ -22,15 +24,37 @@ var makeMove = function(algo, skill=3) {
 }
 
 // Computer vs Computer
-var playGame = function(algo=4, skillW=2, skillB=2) {
+var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   if (game.game_over() === true) {
     console.log('game over');
+    console.log('White: algo=' + algoW + ' skill=' + skillW);
+    console.log('Black: algo=' + algoB + ' skill=' + skillB);
+    //  \n' + 'White: algo=' + algoW + ' skill=' + skillW + ' Black: algo=' + algoB + ' skill=' + skillB
     return;
   }
+  //randomizers for algo and skill, run once at start of game
+  //algo randomizers need to be implemented once other evals are implemented
+  if (algoW === 0){
+    algoW = 1;
+  }
+  if (skillW === 0){
+    //sets skill to a random int between 1 and 3
+    skillW = Math.floor((Math.random() * 3) +1);
+  }
+  if (algoB === 0){
+    algoB = 1;
+  }
+  if (skillB === 0){
+    skillB = Math.floor((Math.random() * 3) +1);
+  }
+  console.log('White: algo=' + algoW + ' skill=' + skillW);
+  console.log('Black: algo=' + algoB + ' skill=' + skillB);
+  
   var skill = game.turn() === 'w' ? skillW : skillB;
+  var algo = game.turn() === 'w' ? algoW : algoB;
   makeMove(algo, skill);
   window.setTimeout(function() {
-    playGame(algo, skillW, skillB);
+    playGame(algoW, skillW, algoB, skillB);
   }, 250);
 };
 
