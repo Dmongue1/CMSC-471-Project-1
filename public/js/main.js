@@ -25,12 +25,14 @@ var makeMove = function(algo, skill=3) {
 
 // Computer vs Computer
 var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
+  
   if (game.game_over() === true) {
     console.log('Game Over');
     console.log('White: algo=' + algoW + ' skill=' + skillW);
     console.log('Black: algo=' + algoB + ' skill=' + skillB);
+    console.log('Number of Turns: ' + game.history().length);
     if (game.in_stalemate() || game.in_draw()){ 
-       console.log('Stalemate');
+       console.log('Stalemate / Draw');
     } else if (game.turn() === 'w'){ //Because if the next turn is white, the final turn must've been black
        console.log('Black wins');
     } else {
