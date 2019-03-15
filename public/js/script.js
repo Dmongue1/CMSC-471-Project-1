@@ -1,12 +1,11 @@
-var board,
-    game = new Chess();
-
 /*The "AI" part starts here */
 
 var minimaxRoot =function(depth, game, isMaximisingPlayer) {
 
     var newGameMoves = game.ugly_moves();
-    var bestMove = -9999;
+    newGameMoves.sort(function(a, b){return 0.5 - Math.random()});
+
+    var bestMove2 = -9999;
     var bestMoveFound;
 
     for(var i = 0; i < newGameMoves.length; i++) {
@@ -14,8 +13,8 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
         game.ugly_move(newGameMove);
         var value = minimax(depth - 1, game, -10000, 10000, !isMaximisingPlayer);
         game.undo();
-        if(value >= bestMove) {
-            bestMove = value;
+        if(value >= bestMove2) {
+            bestMove2 = value;
             bestMoveFound = newGameMove;
         }
     }
@@ -25,39 +24,39 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
 var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
     positionCount++;
     if (depth === 0) {
-        return -evaluateBoard(game.board());
+        return -evaluateBoard2(game.board());
     }
 
     var newGameMoves = game.ugly_moves();
 
     if (isMaximisingPlayer) {
-        var bestMove = -9999;
+        var bestMove2 = -9999;
         for (var i = 0; i < newGameMoves.length; i++) {
             game.ugly_move(newGameMoves[i]);
-            bestMove = Math.max(bestMove, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
+            bestMove2 = Math.max(bestMove2, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
             game.undo();
-            alpha = Math.max(alpha, bestMove);
+            alpha = Math.max(alpha, bestMove2);
             if (beta <= alpha) {
-                return bestMove;
+                return bestMove2;
             }
         }
-        return bestMove;
+        return bestMove2;
     } else {
-        var bestMove = 9999;
+        var bestMove2 = 9999;
         for (var i = 0; i < newGameMoves.length; i++) {
             game.ugly_move(newGameMoves[i]);
-            bestMove = Math.min(bestMove, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
+            bestMove2 = Math.min(bestMove2, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
             game.undo();
-            beta = Math.min(beta, bestMove);
+            beta = Math.min(beta, bestMove2);
             if (beta <= alpha) {
-                return bestMove;
+                return bestMove2;
             }
         }
-        return bestMove;
+        return bestMove2;
     }
 };
 
-var evaluateBoard = function (board) {
+var evaluateBoard2 = function (board) {
     var totalEvaluation = 0;
     for (var i = 0; i < 8; i++) {
         for (var j = 0; j < 8; j++) {
@@ -85,8 +84,7 @@ var pawnEvalWhite =
 
 var pawnEvalBlack = reverseArray(pawnEvalWhite);
 
-var knightEval =
-    [
+var knightEvalWhite = [
         [-5.0, -4.0, -3.0, -3.0, -3.0, -3.0, -4.0, -5.0],
         [-4.0, -2.0,  0.0,  0.0,  0.0,  0.0, -2.0, -4.0],
         [-3.0,  0.0,  1.0,  1.5,  1.5,  1.0,  0.0, -3.0],
@@ -96,6 +94,8 @@ var knightEval =
         [-4.0, -2.0,  0.0,  0.5,  0.5,  0.0, -2.0, -4.0],
         [-5.0, -4.0, -3.0, -3.0, -3.0, -3.0, -4.0, -5.0]
     ];
+
+var knightEvalBlack = reverseArray(knightEvalWhite);
 
 var bishopEvalWhite = [
     [ -2.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -2.0],
@@ -118,12 +118,12 @@ var rookEvalWhite = [
     [ -0.5,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0, -0.5],
     [ -0.5,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0, -0.5],
     [ -0.5,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0, -0.5],
-    [  0.0,   0.0, 0.0,  0.5,  0.5,  0.0,  0.0,  0.0]
+    [  0.0,  0.0,  0.0,  0.5,  0.5,  0.0,  0.0,  0.0]
 ];
 
 var rookEvalBlack = reverseArray(rookEvalWhite);
 
-var evalQueen = [
+var queenEvalWhite = [
     [ -2.0, -1.0, -1.0, -0.5, -0.5, -1.0, -1.0, -2.0],
     [ -1.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0, -1.0],
     [ -1.0,  0.0,  0.5,  0.5,  0.5,  0.5,  0.0, -1.0],
@@ -134,8 +134,9 @@ var evalQueen = [
     [ -2.0, -1.0, -1.0, -0.5, -0.5, -1.0, -1.0, -2.0]
 ];
 
-var kingEvalWhite = [
+var queenEvalBlack = reverseArray(queenEvalWhite);
 
+var kingEvalWhite = [
     [ -3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
     [ -3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
     [ -3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
@@ -148,9 +149,6 @@ var kingEvalWhite = [
 
 var kingEvalBlack = reverseArray(kingEvalWhite);
 
-
-
-
 var getPieceValue = function (piece, x, y) {
     if (piece === null) {
         return 0;
@@ -161,11 +159,11 @@ var getPieceValue = function (piece, x, y) {
         } else if (piece.type === 'r') {
             return 50 + ( isWhite ? rookEvalWhite[y][x] : rookEvalBlack[y][x] );
         } else if (piece.type === 'n') {
-            return 30 + knightEval[y][x];
+            return 30 + ( isWhite ? knightEvalWhite[y][x] : knightEvalBlack[y][x] );
         } else if (piece.type === 'b') {
             return 30 + ( isWhite ? bishopEvalWhite[y][x] : bishopEvalBlack[y][x] );
         } else if (piece.type === 'q') {
-            return 90 + evalQueen[y][x];
+            return 90 + ( isWhite ? queenEvalWhite[y][x] : queenEvalBlack[y][x] );
         } else if (piece.type === 'k') {
             return 900 + ( isWhite ? kingEvalWhite[y][x] : kingEvalBlack[y][x] );
         }
@@ -179,24 +177,6 @@ var getPieceValue = function (piece, x, y) {
 
 /* board visualization and games state handling */
 
-var onDragStart = function (source, piece, position, orientation) {
-    if (game.in_checkmate() === true || game.in_draw() === true ||
-        piece.search(/^b/) !== -1) {
-        return false;
-    }
-};
-
-var makeBestMove = function () {
-    var bestMove = getBestMove(game);
-    game.ugly_move(bestMove);
-    board.position(game.fen());
-    renderMoveHistory(game.history());
-    if (game.game_over()) {
-        alert('Game over');
-    }
-};
-
-
 var positionCount;
 var getBestMove = function (skill, game) {
     if (game.game_over()) {
@@ -206,83 +186,7 @@ var getBestMove = function (skill, game) {
     positionCount = 0;
     var depth = skill;
 
-    var bestMove = minimaxRoot(depth, game, true);
+    var bestMove2 = minimaxRoot(depth, game, true);
 
-    return bestMove;
+    return bestMove2;
 };
-
-var renderMoveHistory = function (moves) {
-    var historyElement = $('#move-history').empty();
-    historyElement.empty();
-    for (var i = 0; i < moves.length; i = i + 2) {
-        historyElement.append('<span>' + moves[i] + ' ' + ( moves[i + 1] ? moves[i + 1] : ' ') + '</span><br>')
-    }
-    historyElement.scrollTop(historyElement[0].scrollHeight);
-
-};
-
-var onDrop = function (source, target) {
-
-    var move = game.move({
-        from: source,
-        to: target,
-        promotion: 'q'
-    });
-
-    removeGreySquares();
-    if (move === null) {
-        return 'snapback';
-    }
-
-    renderMoveHistory(game.history());
-    window.setTimeout(makeBestMove, 250);
-};
-
-var onSnapEnd = function () {
-    board.position(game.fen());
-};
-
-var onMouseoverSquare = function(square, piece) {
-    var moves = game.moves({
-        square: square,
-        verbose: true
-    });
-
-    if (moves.length === 0) return;
-
-    greySquare(square);
-
-    for (var i = 0; i < moves.length; i++) {
-        greySquare(moves[i].to);
-    }
-};
-
-var onMouseoutSquare = function(square, piece) {
-    removeGreySquares();
-};
-
-var removeGreySquares = function() {
-    $('#board .square-55d63').css('background', '');
-};
-
-var greySquare = function(square) {
-    var squareEl = $('#board .square-' + square);
-
-    var background = '#a9a9a9';
-    if (squareEl.hasClass('black-3c85d') === true) {
-        background = '#696969';
-    }
-
-    squareEl.css('background', background);
-};
-
-var cfg = {
-    draggable: true,
-    position: 'start',
-    onDragStart: onDragStart,
-    onDrop: onDrop,
-    onMouseoutSquare: onMouseoutSquare,
-    onMouseoverSquare: onMouseoverSquare,
-    onSnapEnd: onSnapEnd
-};
-board = ChessBoard('board', cfg);

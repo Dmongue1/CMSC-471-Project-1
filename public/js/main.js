@@ -77,6 +77,6 @@ var onDrop = function(source, target) {
 
   // make move for black
   window.setTimeout(function() {
-    makeMove(4, 3);
+    makeMove(1, 3);
   }, 250);
 };
