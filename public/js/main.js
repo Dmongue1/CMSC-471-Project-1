@@ -1,5 +1,6 @@
 var gameDataArray = [
   //starts empty, elements added on gameover in playGame()
+  /*
   { 
     TestingData: 'this',
     TestingData2: 'is'
@@ -8,6 +9,7 @@ var gameDataArray = [
     TestingData: 'a',
     TestingData2: 'test'
   }
+  */
 ];
 
 // Computer makes a move with algorithm choice and skill/depth level
@@ -55,7 +57,6 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
        console.log('White wins');
        gameWinner = 'w';
     }
-    return;
     
     //build object to record data from this game
     var thisGameData = {
@@ -69,6 +70,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     //add object to array
     gameDataArray.push(thisGameData);
     
+    return;
   }
   
   //randomizers for algo and skill, run once at start of game
@@ -158,6 +160,7 @@ var convertArrayOfObjectsToCSV = function(args) {
 
         data = args.data || null;
         if (data == null || !data.length) {
+            console.log("Empty array");
             return null;
         }
 
