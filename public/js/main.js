@@ -166,7 +166,7 @@ var convertArrayOfObjectsToCSV = function(args) {
         return result;
     }
 
-var downloadCSVfunction(args) {  
+var downloadCSV = function(args) {  
         var data, filename, link;
         var csv = convertArrayOfObjectsToCSV({
             data: gameDataArray
