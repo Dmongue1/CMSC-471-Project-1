@@ -1,15 +1,5 @@
 var gameDataArray = [
   //starts empty, elements added on gameover in playGame()
-  /*
-  { 
-    TestingData: 'this',
-    TestingData2: 'is'
-  },
-  {
-    TestingData: 'a',
-    TestingData2: 'test'
-  }
-  */
 ];
 
 // Computer makes a move with algorithm choice and skill/depth level
@@ -125,6 +115,14 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   window.setTimeout(function() {
     playGame(algoW, skillW, algoB, skillB);
   }, 250);
+};
+
+var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
+  var i;
+  for(i = 0; i < numGames; i++){
+    playGame(alg1, depth1, alg2, depth2);
+    resetBoard();
+  }
 };
 
 // Handles what to do after human makes move.
