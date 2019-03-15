@@ -8,32 +8,31 @@ var makeMove = function(algo, skill=3) {
   // Calculate the best move, using chosen algorithm
   if (algo === 1) {
     var move = calcBestMove(skill, game, game.turn())[1];
-    game.move(move);
-  } else if (algo === 2) {
-    var move = getBestMove(skill, game);
-    game.ugly_move(move);
     /*
-  } else if (algo === 3) { //<------------------------------------------------------------------change once eval_3 implemented
+  } else if (algo === 2) {  //<-------------------------------------------------------------change once other evals implemented
+    var move = calcBestMoveOne(game.turn());
+  } else if (algo === 3) {
     var move = calcBestMoveNoAB(skill, game, game.turn())[1];
     */
   } else {
     var move = randomMove();
-    game.move(move);
   }
+  // Make the calculated move
+  game.move(move);
   // Update board positions
   board.position(game.fen());
 }
 
 // Computer vs Computer
 var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
-  
   if (game.game_over() === true) {
     console.log('Game Over');
     console.log('White: algo=' + algoW + ' skill=' + skillW);
     console.log('Black: algo=' + algoB + ' skill=' + skillB);
-    console.log('Number of Turns: ' + game.history().length);
     if (game.in_stalemate() || game.in_draw()){ 
-       console.log('Stalemate / Draw');
+       //evaluateBoard(game.board(), 'w') === 0
+       //game.in_stalemate() is an empty function, used board eval instead. Stalemate when only kings left, so eval=0
+       console.log('Stalemate');
     } else if (game.turn() === 'w'){ //Because if the next turn is white, the final turn must've been black
        console.log('Black wins');
     } else {
@@ -52,7 +51,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   var sB_Random = false;
 
   if (algoW === 0){
-    algoW = Math.floor((Math.random() * 2) + 1); //<------------------------------------change once eval_3 implemented
+    algoW = 1; //<----------------------------------------------------------------------------change once other evals implemented
     aW_Random = true;
   }
   if (skillW === 0){
@@ -61,7 +60,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     sW_Random = true;
   }
   if (algoB === 0){
-    algoB = Math.floor((Math.random() * 2) + 1); //<------------------------------------change once eval_3 implemented
+    algoB = 1;  //<---------------------------------------------------------------------------change once other evals implemented
     aB_Random = true;
   }
   if (skillB === 0){
@@ -74,9 +73,9 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     //loop in case re-randomization gives same values as initial randomization
     while (algoW === algoB && skillW === skillB){
       if (aW_Random){
-        algoW = Math.floor((Math.random() * 2) +1);  //<------------------------------------change once eval_3 implemented
+        //algoW = Math.floor((Math.random() * 3) +1);  <------------------------------------change once other evals implemented
       } else if (aB_Random){
-        algoB = Math.floor((Math.random() * 2) +1);  //<------------------------------------change once eval_3 implemented
+        //algoB = Math.floor((Math.random() * 3) +1);  <------------------------------------change once other evals implemented
       } else if (sW_Random){
         skillW = Math.floor((Math.random() * 3) +1);
       } else {
