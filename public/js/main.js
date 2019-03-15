@@ -121,9 +121,11 @@ var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
   var i;
   for(i = 0; i < numGames; i++){
     playGame(alg1, depth1, alg2, depth2);
+    /*
     while(game.game_over() == false){
       //empty loop, stalls this function until current game reaches game over, otherwise all games run at once rather than one at a time
     }
+    */
     resetBoard();
   }
 };
