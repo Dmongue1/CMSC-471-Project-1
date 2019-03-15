@@ -14,8 +14,8 @@ var evaluateBoard3 = function(board, color) {
         value += getPieceVal(board[i][j], color);
         value += getLocationValue(board[i][j], color, i ,j);
       }
-    });
-  });
+    }
+  }
 
   return value;
 };
@@ -58,6 +58,23 @@ var getLocationValue = function (piece, color, x, y) {
     return piece.color === color ? locVal : -locVal;
 };
 
+var getHeatValue = function (game, move, color) {
+    // Finds how many moves can capture where the piece just moved
+    var numCaptureMoves = game.generate_moves({square: move.to}).length;
+
+    // Removes the piece so same color pieces can move to the square
+    var pieceChecked = game.get(move.to);
+    game.remove(move.to);
+
+    // Finds how many pieces are "defending" the piece that just moved
+    var numDefending = game.generate_moves({square: move.to}).length;
+    
+    // Replaces the piece that was removed
+    game.put(pieceChecked, move.to);
+
+    return (numDefending - numCaptureMoves) * (getPieceVal(pieceChecked, color) * 0.1);
+}
+
 /**
  * Calculates the best move using Minimax with Alpha Beta Pruning.
  * @param {Number} depth - How many moves ahead to evaluate
@@ -93,9 +110,7 @@ var genMove = function(depth, game, playerColor,
     game.move(move);
     // Recursively get the value from this move
     value = genMove(depth-1, game, playerColor, alpha, beta, !isMaximizingPlayer)[0];
-
-    // Undo previous move
-    game.undo();
+    value += getHeatValue(game, move, playerColor);
 
     // Log the value of this move
     console.log(isMaximizingPlayer ? 'Max: ' : 'Min: ', depth, move, value,
@@ -116,6 +131,9 @@ var genMove = function(depth, game, playerColor,
       }
       beta = Math.min(beta, value);
     }
+
+    // Undo previous move
+    game.undo();
 
     // Check for alpha beta pruning
     if (beta <= alpha) {
