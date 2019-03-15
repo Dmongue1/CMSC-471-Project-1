@@ -8,17 +8,18 @@ var makeMove = function(algo, skill=3) {
   // Calculate the best move, using chosen algorithm
   if (algo === 1) {
     var move = calcBestMove(skill, game, game.turn())[1];
-    /*
+    game.move(move);
   } else if (algo === 2) {
-    var move = calcBestMoveOne(game.turn());
+    var move = getBestMove(skill, game);
+    game.ugly_move(move);
+    /*
   } else if (algo === 3) {
     var move = calcBestMoveNoAB(skill, game, game.turn())[1];
     */
   } else {
     var move = randomMove();
+    game.move(move);
   }
-  // Make the calculated move
-  game.move(move);
   // Update board positions
   board.position(game.fen());
 }
@@ -35,14 +36,14 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   //randomizers for algo and skill, run once at start of game
   //algo randomizers need to be implemented once other evals are implemented
   if (algoW === 0){
-    algoW = 1;
+    algoW = Math.floor((Math.random() * 2) + 1);
   }
   if (skillW === 0){
     //sets skill to a random int between 1 and 3
     skillW = Math.floor((Math.random() * 3) +1);
   }
   if (algoB === 0){
-    algoB = 1;
+    algoB = Math.floor((Math.random() * 2) + 1);
   }
   if (skillB === 0){
     skillB = Math.floor((Math.random() * 3) +1);
