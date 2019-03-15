@@ -1,6 +1,6 @@
 /*The "AI" part starts here */
 
-var minimaxRoot =function(depth, game, isMaximisingPlayer) {
+var minimaxRoot =function(depth, game, color, isMaximisingPlayer = true) {
 
     var newGameMoves = game.ugly_moves();
     newGameMoves.sort(function(a, b){return 0.5 - Math.random()});
@@ -11,7 +11,12 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
     for(var i = 0; i < newGameMoves.length; i++) {
         var newGameMove = newGameMoves[i]
         game.ugly_move(newGameMove);
-        var value = minimax(depth - 1, game, -10000, 10000, !isMaximisingPlayer);
+        /*if (color === 'w') {
+            var value = minimax(depth - 1, game, -10000, 10000, 'b', !isMaximisingPlayer);
+        } else {
+            var value = minimax(depth - 1, game, -10000, 10000, 'w', !isMaximisingPlayer);
+        }*/
+        var value = minimax(depth - 1, game, -10000, 10000, color, !isMaximisingPlayer);
         game.undo();
         if(value >= bestMove2) {
             bestMove2 = value;
@@ -21,10 +26,11 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
     return bestMoveFound;
 };
 
-var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
+var minimax = function (depth, game, alpha, beta, color, isMaximisingPlayer) {
     positionCount++;
+    // Base case board evaluation
     if (depth === 0) {
-        return -evaluateBoard2(game.board());
+        return -evaluateBoard2(game.board(), color);
     }
 
     var newGameMoves = game.ugly_moves();
@@ -33,34 +39,41 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
         var bestMove2 = -9999;
         for (var i = 0; i < newGameMoves.length; i++) {
             game.ugly_move(newGameMoves[i]);
-            bestMove2 = Math.max(bestMove2, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
+            if (color === 'w') {
+                bestMove2 = Math.max(bestMove2, minimax(depth - 1, game, alpha, beta, 'b', !isMaximisingPlayer));
+            } else {
+                bestMove2 = Math.max(bestMove2, minimax(depth - 1, game, alpha, beta, 'w', !isMaximisingPlayer));
+            }
             game.undo();
             alpha = Math.max(alpha, bestMove2);
             if (beta <= alpha) {
                 return bestMove2;
             }
         }
-        return bestMove2;
     } else {
         var bestMove2 = 9999;
         for (var i = 0; i < newGameMoves.length; i++) {
             game.ugly_move(newGameMoves[i]);
-            bestMove2 = Math.min(bestMove2, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
+            if (color === 'w') {
+                bestMove2 = Math.min(bestMove2, minimax(depth - 1, game, alpha, beta, 'b', !isMaximisingPlayer));
+            } else {
+                bestMove2 = Math.min(bestMove2, minimax(depth - 1, game, alpha, beta, 'w', !isMaximisingPlayer));
+            }
             game.undo();
             beta = Math.min(beta, bestMove2);
             if (beta <= alpha) {
                 return bestMove2;
             }
         }
-        return bestMove2;
     }
+    return bestMove2;
 };
 
-var evaluateBoard2 = function (board) {
+var evaluateBoard2 = function (board, color) {
     var totalEvaluation = 0;
     for (var i = 0; i < 8; i++) {
         for (var j = 0; j < 8; j++) {
-            totalEvaluation = totalEvaluation + getPieceValue(board[i][j], i ,j);
+            totalEvaluation = totalEvaluation + getPieceValue(board[i][j], color, i ,j);
         }
     }
     return totalEvaluation;
@@ -149,7 +162,7 @@ var kingEvalWhite = [
 
 var kingEvalBlack = reverseArray(kingEvalWhite);
 
-var getPieceValue = function (piece, x, y) {
+var getPieceValue = function (piece, color, x, y) {
     if (piece === null) {
         return 0;
     }
@@ -171,14 +184,14 @@ var getPieceValue = function (piece, x, y) {
     };
 
     var absoluteValue = getAbsoluteValue(piece, piece.color === 'w', x ,y);
-    return piece.color === 'w' ? absoluteValue : -absoluteValue;
+    return piece.color !== color ? absoluteValue : -absoluteValue;
 };
 
 
 /* board visualization and games state handling */
 
 var positionCount;
-var getBestMove = function (skill, game) {
+var getBestMove = function (skill, game, color) {
     if (game.game_over()) {
         alert('Game over');
     }
@@ -186,7 +199,7 @@ var getBestMove = function (skill, game) {
     positionCount = 0;
     var depth = skill;
 
-    var bestMove2 = minimaxRoot(depth, game, true);
+    var bestMove2 = minimaxRoot(depth, game, color);
 
     return bestMove2;
 };

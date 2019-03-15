@@ -10,7 +10,7 @@ var makeMove = function(algo, skill=3) {
     var move = calcBestMove(skill, game, game.turn())[1];
     game.move(move);
   } else if (algo === 2) {
-    var move = getBestMove(skill, game);
+    var move = getBestMove(skill, game, game.turn());
     game.ugly_move(move);
     /*
   } else if (algo === 3) { //<------------------------------------------------------------------change once eval_3 implemented
