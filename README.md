@@ -4,6 +4,8 @@ Goal: to allow the game to write relevant data to an output file once a game is 
 
 Note: It looks like there isn't a way to do this directly (due to javascript's built in security protocols), so I'm looking into building in some sort of code that would build a csv file and allow it to be downloaded, as well as adding a 'reset game' button to the html so that multiple games could be run without needing to reload everything from scratch (which would toss out the saved data).
 
+ - Added in a reset button that resets the game (need to add board reset functionality)
+
 # Chess AI
 A chess AI, with with different algorithms of increasing intelligence.
 
