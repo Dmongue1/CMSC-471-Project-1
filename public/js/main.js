@@ -1,6 +1,5 @@
 var gameDataArray = [
   //starts empty, elements added on gameover in playGame()
-  /*
   { 
     TestingData: 'this',
     TestingData2: 'is'
@@ -9,7 +8,6 @@ var gameDataArray = [
     TestingData: 'a',
     TestingData2: 'test'
   }
-  */
 ];
 
 // Computer makes a move with algorithm choice and skill/depth level
