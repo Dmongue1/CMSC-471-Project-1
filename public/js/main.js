@@ -166,14 +166,14 @@ var convertArrayOfObjectsToCSV = function(args) {
         return result;
     }
 
-var downloadCSV = function(args) {  
+var downloadCSV = function() {  
         var data, filename, link;
         var csv = convertArrayOfObjectsToCSV({
             data: gameDataArray
         });
         if (csv == null) return;
 
-        filename = args.filename || 'export.csv';
+        filename = 'export.csv';
 
         if (!csv.match(/^data:text\/csv/i)) {
             csv = 'data:text/csv;charset=utf-8,' + csv;
