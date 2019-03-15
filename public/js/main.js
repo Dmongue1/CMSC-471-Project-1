@@ -117,3 +117,7 @@ var onDrop = function(source, target) {
     makeMove(1, 3);
   }, 250);
 };
+
+var resetBoard = function(){
+  game.reset();
+};
