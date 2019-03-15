@@ -1,6 +1,7 @@
 File Writer notes;
 
 Goal: to allow the game to write relevant data to an output file once a game is completed.
+Note: It looks like there isn't a way to do this directly (due to javascript's built in security protocals), so I'm looking into building in some sort of code that would build a csv file and allow it to be downloaded.
 
 # Chess AI
 A chess AI, with with different algorithms of increasing intelligence.
