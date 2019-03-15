@@ -26,9 +26,16 @@ var makeMove = function(algo, skill=3) {
 // Computer vs Computer
 var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   if (game.game_over() === true) {
-    console.log('game over');
+    console.log('Game Over');
     console.log('White: algo=' + algoW + ' skill=' + skillW);
     console.log('Black: algo=' + algoB + ' skill=' + skillB);
+    if (game.in_stalemate() === true){
+       console.log('Stalemate');
+    } else if (game.turn() === 'w'){
+       console.log('White wins');
+    } else {
+       console.log('Black wins');
+    }
     return;
   }
   
