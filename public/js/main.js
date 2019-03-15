@@ -29,7 +29,8 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     console.log('Game Over');
     console.log('White: algo=' + algoW + ' skill=' + skillW);
     console.log('Black: algo=' + algoB + ' skill=' + skillB);
-    if (evaluateBoard(game.board(), 'w') === 0){ 
+    if (game.in_stalemate() || game.in_draw()){ 
+       //evaluateBoard(game.board(), 'w') === 0
        //game.in_stalemate() is an empty function, used board eval instead. Stalemate when only kings left, so eval=0
        console.log('Stalemate');
     } else if (game.turn() === 'w'){ //Because if the next turn is white, the final turn must've been black
