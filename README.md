@@ -9,6 +9,7 @@ Goals of this edit:
    * End game check correctly shows who won based on who took the final turn
    * Stalemate/draw check added
  - Add turn counter
+   * Number of turns determined by the length of the move history array at the end of the game.
 
 # Chess AI
 A chess AI, with with different algorithms of increasing intelligence.
