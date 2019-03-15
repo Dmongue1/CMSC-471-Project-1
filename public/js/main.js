@@ -1,3 +1,17 @@
+var gameDataArray = [
+  //starts empty, elements added on gameover in playGame()
+  /*
+  { 
+    TestingData: 'this',
+    TestingData2: 'is'
+  },
+  {
+    TestingData: 'a',
+    TestingData2: 'test'
+  }
+  */
+];
+
 // Computer makes a move with algorithm choice and skill/depth level
 var makeMove = function(algo, skill=3) {
   // exit if the game is over
@@ -44,7 +58,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
        gameWinner = 'w';
     }
     return;
-    /*
+    
     //build object to record data from this game
     var thisGameData = {
       whiteAlgo: algoW, 
@@ -56,7 +70,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     
     //add object to array
     gameDataArray.push(thisGameData);
-    */
+    
   }
   
   //randomizers for algo and skill, run once at start of game
@@ -140,20 +154,6 @@ var resetBoard = function(){
   game.reset();
   board.start();
 };
-
-var gameDataArray = [
-  //starts empty, elements added on gameover in playGame()
-  { 
-    TestingData: 'this',
-    TestingData2: 'is'
-  },
-  {
-    TestingData: 'a',
-    TestingData2: 'test'
-  }
-];
-
-  
 
 var convertArrayOfObjectsToCSV = function(args) {  
         var result, ctr, keys, columnDelimiter, lineDelimiter, data;
