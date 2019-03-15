@@ -29,7 +29,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     console.log('Game Over');
     console.log('White: algo=' + algoW + ' skill=' + skillW);
     console.log('Black: algo=' + algoB + ' skill=' + skillB);
-    if (game.in_stalemate() === true){
+    if (game.in_stalemate()){ //in_stalemate might not work??
        console.log('Stalemate');
     } else if (game.turn() === 'w'){ //Because if the next turn is white, the final turn must've ben black
        console.log('Black wins');
