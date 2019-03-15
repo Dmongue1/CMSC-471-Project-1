@@ -10,6 +10,10 @@ Goals of this edit:
    * Stalemate/draw check added
  - Add turn counter
    * Number of turns determined by the length of the move history array at the end of the game.
+   
+Post-merge adjustments:
+ - Added eval_2 functionality to re-randomizer
+ - Added 'edit this' marker comments to the algo rngs to make them easier to find in the code once eval_3 is implemented
 
 # Chess AI
 A chess AI, with with different algorithms of increasing intelligence.
