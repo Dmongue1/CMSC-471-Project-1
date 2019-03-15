@@ -12,10 +12,9 @@ var makeMove = function(algo, skill=3) {
   } else if (algo === 2) {
     var move = getBestMove(skill, game, game.turn());
     game.ugly_move(move);
-    /*
-  } else if (algo === 3) { //<------------------------------------------------------------------change once eval_3 implemented
-    var move = calcBestMoveNoAB(skill, game, game.turn())[1];
-    */
+  } else if (algo === 3) {
+    var move = genMove(skill, game, game.turn())[1];
+    game.move(move);
   } else {
     var move = randomMove();
     game.move(move);
@@ -52,7 +51,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   var sB_Random = false;
 
   if (algoW === 0){
-    algoW = Math.floor((Math.random() * 2) + 1); //<------------------------------------change once eval_3 implemented
+    algoW = Math.floor((Math.random() * 3) + 1);
     aW_Random = true;
   }
   if (skillW === 0){
@@ -61,7 +60,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     sW_Random = true;
   }
   if (algoB === 0){
-    algoB = Math.floor((Math.random() * 2) + 1); //<------------------------------------change once eval_3 implemented
+    algoB = Math.floor((Math.random() * 3) + 1);
     aB_Random = true;
   }
   if (skillB === 0){
@@ -74,9 +73,9 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     //loop in case re-randomization gives same values as initial randomization
     while (algoW === algoB && skillW === skillB){
       if (aW_Random){
-        algoW = Math.floor((Math.random() * 2) +1);  //<------------------------------------change once eval_3 implemented
+        algoW = Math.floor((Math.random() * 3) +1);
       } else if (aB_Random){
-        algoB = Math.floor((Math.random() * 2) +1);  //<------------------------------------change once eval_3 implemented
+        algoB = Math.floor((Math.random() * 3) +1);
       } else if (sW_Random){
         skillW = Math.floor((Math.random() * 3) +1);
       } else {
