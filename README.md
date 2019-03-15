@@ -3,9 +3,8 @@ Editing main.js
 
 Goals of this edit: 
  - Add re-randomization if randomized players end up identical
-  * booleans to exclude user-specified values from re-randomization
-  * Looped re-randomizer in case re-randomized values end up being identical to the pre-randomization values
-  
+   * booleans to exclude user-specified values from re-randomization
+   * Looped re-randomizer in case re-randomized values end up being identical to the pre-randomization values
  - Add end-game check to see who won or if it was a stalemate
  - Add turn counter
 
