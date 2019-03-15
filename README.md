@@ -6,6 +6,8 @@ Goals of this edit:
    * booleans to exclude user-specified values from re-randomization
    * Looped re-randomizer in case re-randomized values end up being identical to the pre-randomization values
  - Add end-game check to see who won or if it was a stalemate
+   * End game check correctly shows who won based on who took the final turn
+   * Stalemate check based on board evalutation function, since game.in_stalemate() isn't implemented in the library provided
  - Add turn counter
 
 # Chess AI
