@@ -10,10 +10,11 @@ Note: It looks like there isn't a way to do this directly (due to javascript's b
  - Added in button to dowload a csv file with the data from the games run on that instance
    * builds csv file from an array
    * downloads/displays csv file
+   * added empty global array to track game results
+   * game data objects added at end of each game
    
    
 Next objectives:
- - Add in array builder that saves relevant data to the output file
  - Add in buttons to play single game to html, with input fields for algos and skills
  - Add in function that loops playGame() with specified parameters for a specified number of times without needing any human interaction
 
