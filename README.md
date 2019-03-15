@@ -5,6 +5,17 @@ Goal: to allow the game to write relevant data to an output file once a game is 
 Note: It looks like there isn't a way to do this directly (due to javascript's built in security protocols), so I'm looking into building in some sort of code that would build a csv file and allow it to be downloaded, as well as adding a 'reset game' button to the html so that multiple games could be run without needing to reload everything from scratch (which would toss out the saved data).
 
  - Added in a reset button that resets the game and game board
+   * resets game and board without clearing out data file (see below)
+ 
+ - Added in button to dowload a csv file with the data from the games run on that instance
+   * builds csv file from an array
+   * downloads/displays csv file
+   
+   
+Next objectives:
+ - Add in array builder that saves relevant data to the output file
+ - Add in buttons to play single game to html, with input fields for algos and skills
+ - Add in function that loops playGame() with specified parameters for a specified number of times without needing any human interaction
 
 # Chess AI
 A chess AI, with with different algorithms of increasing intelligence.
