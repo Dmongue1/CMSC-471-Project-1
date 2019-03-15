@@ -1,3 +1,20 @@
+v2 notes:
+Editing main.js
+
+Goals of this edit: 
+ - Add re-randomization if randomized players end up identical
+   * booleans to exclude user-specified values from re-randomization
+   * Looped re-randomizer in case re-randomized values end up being identical to the pre-randomization values
+ - Add end-game check to see who won or if it was a stalemate
+   * End game check correctly shows who won based on who took the final turn
+   * Stalemate/draw check added
+ - Add turn counter
+   * Number of turns determined by the length of the move history array at the end of the game.
+   
+Post-merge adjustments:
+ - Added eval_2 functionality to re-randomizer
+ - Added 'edit this' marker comments to the algo rngs to make them easier to find in the code once eval_3 is implemented
+
 # Chess AI
 A chess AI, with with different algorithms of increasing intelligence.
 
