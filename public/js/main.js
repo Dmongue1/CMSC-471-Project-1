@@ -29,6 +29,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     console.log('Game Over');
     console.log('White: algo=' + algoW + ' skill=' + skillW);
     console.log('Black: algo=' + algoB + ' skill=' + skillB);
+    /*
     if (game.in_stalemate() === true){
        console.log('Stalemate');
     } else if (game.turn() === 'w'){
@@ -36,6 +37,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     } else {
        console.log('Black wins');
     }
+    */
     return;
   }
   
