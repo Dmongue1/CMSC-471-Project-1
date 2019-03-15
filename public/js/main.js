@@ -121,4 +121,5 @@ var onDrop = function(source, target) {
 var resetBoard = function(){
   //resets game, meant to be used via reset button
   game.reset();
+  board.start();
 };
