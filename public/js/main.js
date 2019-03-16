@@ -119,22 +119,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
 
 //intended to play multiple games in a row, note: normal loops don't work due to playGame's recursion, need to figure out a workaround
 var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
-  //first game
-  playGame(alg1, depth1, alg2, depth2);
-  
-  if (game.game_over() === true){
-    console.log("Test Sentence for Game Over!"); 
-  } else{
-    console.log("Test Sentence for not Game Over!"); 
-  }
-  /*
-  var i;
-  for(i = 0; i < (numGames - 1); i++){
-    playGame(alg1, depth1, alg2, depth2);
-    
-    resetBoard();
-  }
-  */
+
 };
 
 // Handles what to do after human makes move.
