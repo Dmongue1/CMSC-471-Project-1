@@ -122,6 +122,10 @@ var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
   var i;
   for(i = 0; i < numGames; i++){
     playGame(alg1, depth1, alg2, depth2);
+    while(game.game_over() == false){
+      // stall until game finishes via a while loop? 
+    }
+    resetBoard();
   }
 };
 
