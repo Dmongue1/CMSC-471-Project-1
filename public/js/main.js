@@ -121,10 +121,11 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
 var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
   //first game
   playGame(alg1, depth1, alg2, depth2);
-  console.log("Test Sentence!");
   
   if (game.game_over() === true){
     console.log("Test Sentence for Game Over!"); 
+  } else{
+    console.log("Test Sentence for not Game Over!"); 
   }
   /*
   var i;
