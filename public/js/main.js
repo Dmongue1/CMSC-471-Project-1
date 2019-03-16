@@ -123,7 +123,7 @@ var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
   playGame(alg1, depth1, alg2, depth2);
   
   if (game.game_over() === true){
-    console.log("Game over!"); 
+    console.log("Test Sentence for Game Over!"); 
   }
   /*
   var i;
