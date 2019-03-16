@@ -117,6 +117,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   }, 250);
 };
 
+//intended to play multiple games in a row, note: loops don't work due to playGame's recursion
 var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
   var i;
   for(i = 0; i < numGames; i++){
