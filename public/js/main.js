@@ -1,3 +1,7 @@
+var gameDataArray = [
+  //starts empty, elements added on gameover in playGame()
+];
+
 // Computer makes a move with algorithm choice and skill/depth level
 var makeMove = function(algo, skill=3) {
   // exit if the game is over
@@ -32,13 +36,30 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     console.log('White: algo=' + algoW + ' skill=' + skillW);
     console.log('Black: algo=' + algoB + ' skill=' + skillB);
     console.log('Number of Turns: ' + game.history().length);
+    var gameWinner = '0';
     if (game.in_stalemate() || game.in_draw()){ 
        console.log('Stalemate / Draw');
+       gameWinner = 'sd';
     } else if (game.turn() === 'w'){ //Because if the next turn is white, the final turn must've been black
        console.log('Black wins');
+       gameWinner = 'b'
     } else {
        console.log('White wins');
+       gameWinner = 'w';
     }
+    
+    //build object to record data from this game
+    var thisGameData = {
+      whiteAlgo: algoW, 
+      whiteSkill: skillW, 
+      blackAlgo: algoB, 
+      blackSkill: skillB, 
+      gameLength: game.history().length, 
+      winner: gameWinner};
+    
+    //add object to array
+    gameDataArray.push(thisGameData);
+    
     return;
   }
   
@@ -96,6 +117,13 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   }, 250);
 };
 
+/*
+//intended to play multiple games in a row, note: normal loops don't work due to playGame's recursion, need to figure out a workaround
+var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
+
+};
+*/
+
 // Handles what to do after human makes move.
 // Computer automatically makes next move
 var onDrop = function(source, target) {
@@ -117,3 +145,61 @@ var onDrop = function(source, target) {
     makeMove(1, 3);
   }, 250);
 };
+
+var resetBoard = function(){
+  //resets game, meant to be used via reset button
+  game.reset();
+  board.start();
+};
+
+var convertArrayOfObjectsToCSV = function(args) {  
+        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+        data = args.data || null;
+        if (data == null || !data.length) {
+            console.log("Empty array");
+            return null;
+        }
+
+        columnDelimiter = args.columnDelimiter || ',';
+        lineDelimiter = args.lineDelimiter || '\n';
+
+        keys = Object.keys(data[0]);
+
+        result = '';
+        result += keys.join(columnDelimiter);
+        result += lineDelimiter;
+
+        data.forEach(function(item) {
+            ctr = 0;
+            keys.forEach(function(key) {
+                if (ctr > 0) result += columnDelimiter;
+
+                result += item[key];
+                ctr++;
+            });
+            result += lineDelimiter;
+        });
+
+        return result;
+    }
+
+var downloadCSV = function() {  
+        var data, filename, link;
+        var csv = convertArrayOfObjectsToCSV({
+            data: gameDataArray
+        });
+        if (csv == null) return;
+
+        filename = 'chess_export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        } 
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    }
