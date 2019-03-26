@@ -124,6 +124,94 @@ var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
 };
 */
 
+var playGameFast = function(algoW=1, skillW=2, algoB=1, skillB=2) {
+  
+  if (game.game_over() === true) {
+    console.log('Game Over');
+    console.log('White: algo=' + algoW + ' skill=' + skillW);
+    console.log('Black: algo=' + algoB + ' skill=' + skillB);
+    console.log('Number of Turns: ' + game.history().length);
+    var gameWinner = '0';
+    if (game.in_stalemate() || game.in_draw()){ 
+       console.log('Stalemate / Draw');
+       gameWinner = 'sd';
+    } else if (game.turn() === 'w'){ //Because if the next turn is white, the final turn must've been black
+       console.log('Black wins');
+       gameWinner = 'b'
+    } else {
+       console.log('White wins');
+       gameWinner = 'w';
+    }
+    
+    //build object to record data from this game
+    var thisGameData = {
+      whiteAlgo: algoW, 
+      whiteSkill: skillW, 
+      blackAlgo: algoB, 
+      blackSkill: skillB, 
+      gameLength: game.history().length, 
+      winner: gameWinner};
+    
+    //add object to array
+    gameDataArray.push(thisGameData);
+    
+    return;
+  }
+  
+  //randomizers for algo and skill, run once at start of game
+  //algo randomizers need to be implemented once other evals are implemented
+  
+  //booleans for which pieces are randomized, so user-specified values won't be affected by the re-randomizer
+  var aW_Random = false;
+  var sW_Random = false;
+  var aB_Random = false;
+  var sB_Random = false;
+
+  if (algoW === 0){
+    algoW = Math.floor((Math.random() * 2) + 1); //<------------------------------------change once eval_3 implemented
+    aW_Random = true;
+  }
+  if (skillW === 0){
+    //sets skill to a random int between 1 and 3
+    skillW = Math.floor((Math.random() * 3) +1);
+    sW_Random = true;
+  }
+  if (algoB === 0){
+    algoB = Math.floor((Math.random() * 2) + 1); //<------------------------------------change once eval_3 implemented
+    aB_Random = true;
+  }
+  if (skillB === 0){
+    skillB = Math.floor((Math.random() * 3) +1);
+    sB_Random = true
+  }
+
+  //re-randomizer for when two random or semirandom players are identical
+  if (aW_Random || sW_Random || aB_Random || sB_Random){
+    //loop in case re-randomization gives same values as initial randomization
+    while (algoW === algoB && skillW === skillB){
+      if (aW_Random){
+        algoW = Math.floor((Math.random() * 2) +1);  //<------------------------------------change once eval_3 implemented
+      } else if (aB_Random){
+        algoB = Math.floor((Math.random() * 2) +1);  //<------------------------------------change once eval_3 implemented
+      } else if (sW_Random){
+        skillW = Math.floor((Math.random() * 3) +1);
+      } else {
+        skillB = Math.floor((Math.random() * 3) +1);
+      }
+    }
+  }
+  
+  console.log('White: algo=' + algoW + ' skill=' + skillW);
+  console.log('Black: algo=' + algoB + ' skill=' + skillB);
+  
+  var skill = game.turn() === 'w' ? skillW : skillB;
+  var algo = game.turn() === 'w' ? algoW : algoB;
+  makeMove(algo, skill);
+  
+  playGameFast(algoW, skillW, algoB, skillB);
+  
+};
+
 // Handles what to do after human makes move.
 // Computer automatically makes next move
 var onDrop = function(source, target) {
