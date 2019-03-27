@@ -212,7 +212,7 @@ var playGameFast = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   
   var skill = game.turn() === 'w' ? skillW : skillB;
   var algo = game.turn() === 'w' ? algoW : algoB;
-  makeMoveFast(algo, skill);
+  makeMove(algo, skill);
   
   //window.setTimeout(function() {
     playGameFast(algoW, skillW, algoB, skillB);
@@ -220,30 +220,6 @@ var playGameFast = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   
 };
 
-var makeMoveFast = function(algo, skill=3) {
-  // exit if the game is over
-  if (game.game_over() === true) {
-    console.log('Game Over');
-    return;
-  }
-  // Calculate the best move, using chosen algorithm
-  if (algo === 1) {
-    var move = calcBestMove(skill, game, game.turn())[1];
-    game.move(move);
-  } else if (algo === 2) {
-    var move = getBestMove(skill, game, game.turn());
-    game.ugly_move(move);
-    /*
-  } else if (algo === 3) { //<------------------------------------------------------------------change once eval_3 implemented
-    var move = calcBestMoveNoAB(skill, game, game.turn())[1];
-    */
-  } else {
-    var move = randomMove();
-    game.move(move);
-  }
-  // Update board positions
-  board.position(game.fen());
-}
 
 // Handles what to do after human makes move.
 // Computer automatically makes next move
