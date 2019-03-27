@@ -123,10 +123,9 @@ var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
   
   for (var i = 0; i < numGames; i++){
     resetBoard();
-    window.setTimeout(function() {
+    //window.setTimeout(function() {
       playGameFast(alg1, depth1, alg2, depth2);
-    }, 250);
-    //playGameFast(alg1, depth1, alg2, depth2);
+    //}, 250);
   }
   
 };
