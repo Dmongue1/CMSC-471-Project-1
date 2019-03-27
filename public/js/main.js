@@ -213,7 +213,7 @@ var playGameFast = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   
   var skill = game.turn() === 'w' ? skillW : skillB;
   var algo = game.turn() === 'w' ? algoW : algoB;
-  makeMove(algo, skill);
+  makeMoveFast(algo, skill);
   
   //window.setTimeout(function() {
     playGameFast(algoW, skillW, algoB, skillB);
