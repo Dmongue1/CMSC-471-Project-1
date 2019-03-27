@@ -122,9 +122,7 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
 var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
   
   for (var i = 0; i < numGames; i++){
-    game.reset();
-    board.clear();
-    board.reset();
+    resetBoard();
     playGameFast(alg1, depth1, alg2, depth2);
   }
   
