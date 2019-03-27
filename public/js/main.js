@@ -117,12 +117,18 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   }, 250);
 };
 
-/*
+
 //intended to play multiple games in a row, note: normal loops don't work due to playGame's recursion, need to figure out a workaround
 var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
-
+  
+  for (var i = 0; i < numGames; i++){
+    game.reset();
+    board.clear();
+    board.reset();
+    playGameFast(alg1, depth1, alg2, depth2);
+  }
+  
 };
-*/
 
 var playGameFast = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   
