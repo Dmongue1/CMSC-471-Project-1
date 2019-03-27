@@ -131,6 +131,21 @@ var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
   
 };
 
+var test = function(){
+    var b = 0; var w = 0;
+    for (var i = 0; i < 100; i++){
+    game.reset();
+    board.clear();
+    board.start();
+    window.setTimeout(function() {
+    playGame(1, 1, 1, 1);
+});
+    if(game.turn === 'w') {w++;} else {b++;}
+    }
+    console.log(b);
+    console.log(w);
+};
+
 var playGameFast = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   
   if (game.game_over() === true) {
