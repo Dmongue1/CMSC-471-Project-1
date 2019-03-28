@@ -12,6 +12,8 @@ Implemented looping
    * only starts new game if boolean 'continue playing' variable is true (meant to be used via button to halt loop)
    
  - commented out game over alert popup
+ 
+ - added in 'all games finished' popup
   
 Goals: 
  - 'end after current game' button for loop
