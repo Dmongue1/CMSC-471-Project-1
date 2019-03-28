@@ -178,7 +178,8 @@ var gameLoop = function(algoW=1, skillW=2, algoB=1, skillB=2) {
       console.log('Resetting, starting game ' + (gameCounter + 1));
     } else {
        console.log('Finished game loop');
-      alert('Finished all games');
+       alert('Finished all games');
+       continuePlaying = true;
     }
     
     return;
