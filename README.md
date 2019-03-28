@@ -14,9 +14,10 @@ Implemented looping
  - commented out game over alert popup from elsewhere, moved it into single-game playGame function
  
  - added in 'all games finished' popup in gameLoop
+ 
+ - 'end after current game' button for loop
   
 Goals: 
- - 'end after current game' button for loop
  - fields/buttons to play single or multiple games
 
 # Chess AI
