@@ -247,6 +247,28 @@ var resetBoard = function(){
   board.start();
 };
 
+// Handles what to do after human makes move.
+// Computer automatically makes next move
+var onDrop = function(source, target) {
+  // see if the move is legal
+  var move = game.move({
+    from: source,
+    to: target,
+    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+  });
+
+  // If illegal move, snapback
+  if (move === null) return 'snapback';
+
+  // Log the move
+  console.log(move)
+
+  // make move for black
+  window.setTimeout(function() {
+    makeMove(1, 3);
+  }, 250);
+};
+
 var convertArrayOfObjectsToCSV = function(args) {  
         var result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
