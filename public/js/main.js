@@ -135,7 +135,9 @@ var playMultipleGames = function (algW, depthW, algB, depthB, nGames){
   gameCount = 0;
   totNumGames = nGames;
   
-  gameLoop(algW, depthW, algB, depthB);
+  window.setTimeout(function() {
+    gameLoop(algW, depthW, algB, depthB);
+  }, 250);
 }
 
 //intended to play multiple games in a row, note: normal loops don't work due to playGame's recursion, need to figure out a workaround
@@ -173,15 +175,16 @@ var gameLoop = function(algoW=1, skillW=2, algoB=1, skillB=2) {
      
     //start new game
     if (continuePlaying && gameCount < totNumGames){
-      resetBoard();
-      gameLoop(origAlgW, origDepthW, origAlgB, origDepthB);
       console.log('Resetting, starting next game.');
+      resetBoard();
+      window.setTimeout(function() {
+        gameLoop(origAlgW, origDepthW, origAlgB, origDepthB);
+      }, 250);
     } else {
        console.log('Finished game loop ' + totNumGames);
        alert('Finished ' + gameCount + ' games');
        continuePlaying = true;
        gameCount = 0;
-       console.log( gameCount + ' games');
     }
     
     return;
