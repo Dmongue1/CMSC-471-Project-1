@@ -134,11 +134,11 @@ var playMultipleGames = function (algW, depthW, algB, depthB, nGames){
   gameCounter = 0;
   numGames = nGames;
   
-  playGameLoop(algW, depthW, algB, depthB);
+  gameLoop(algW, depthW, algB, depthB);
 }
 
 //intended to play multiple games in a row, note: normal loops don't work due to playGame's recursion, need to figure out a workaround
-var playGameLoop = function(algoW=1, skillW=2, algoB=1, skillB=2) {
+var gameLoop = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   
    if (game.game_over() === true) {
     gameCounter++;
@@ -173,7 +173,10 @@ var playGameLoop = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     //start new game
     if (continuePlaying && gameCounter < numGames){
       resetBoard();
-      
+      gameLoop(origAlgW, origDepthW, origAlgB, origDepthB);
+      console.log('Resetting, starting game ' + (gameCounter + 1));
+    } else {
+       console.log('Finished game loop');
     }
     
     return;
@@ -229,7 +232,7 @@ var playGameLoop = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   var algo = game.turn() === 'w' ? algoW : algoB;
   makeMove(algo, skill);
   window.setTimeout(function() {
-    playGameLoop(algoW, skillW, algoB, skillB);
+    gameLoop(algoW, skillW, algoB, skillB);
   }, 250);
   
 };
