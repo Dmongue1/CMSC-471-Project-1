@@ -11,9 +11,9 @@ Implemented looping
    * only starts new game if game counter is less than the numbers of games asked for by user
    * only starts new game if boolean 'continue playing' variable is true (meant to be used via button to halt loop)
    
- - commented out game over alert popup
+ - commented out game over alert popup from elsewhere, moved it into single-game playGame function
  
- - added in 'all games finished' popup
+ - added in 'all games finished' popup in gameLoop
   
 Goals: 
  - 'end after current game' button for loop
