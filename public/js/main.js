@@ -128,6 +128,7 @@ var gameCount = 0;
 var totNumGames;
 
 var playMultipleGames = function (algW, depthW, algB, depthB, nGames){
+  resetGame();
   origAlgW = algW;
   origDepthW = depthW;
   origAlgB = algB;
