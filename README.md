@@ -1,8 +1,19 @@
 Looper Notes:
 
-Goals:
- - Syncronous playGame that can be looped (playGameFast)
- - Play Multiple Games function
+Implemented looping
+ - initiated by playMultipleGames which takes 5 user inputs: algos for both, skills for both, number of games to play
+   * records user inputs in global variables that can be accessed by gameLoop
+   * initializes game counter
+ 
+ - calls gameLoop
+   * basically just playGame but has a chunk in the game over section that resets board and starts new game with global variables as initial values
+   * increments game counter on game over
+   * only starts new game if game counter is less than the numbers of games asked for by user
+   * only starts new game if boolean 'continue playing' variable is true (meant to be used via button to halt loop)
+   
+ - commented out game over alert popup
+  
+Goals: 
  - 'end after current game' button for loop
  - fields/buttons to play single or multiple games
 
