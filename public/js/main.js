@@ -181,6 +181,7 @@ var gameLoop = function(algoW=1, skillW=2, algoB=1, skillB=2) {
        alert('Finished ' + gameCount + ' games');
        continuePlaying = true;
        gameCount = 0;
+       console.log( gameCount + ' games');
     }
     
     return;
