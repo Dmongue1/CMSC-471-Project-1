@@ -125,7 +125,7 @@ var origDepthW;
 var origAlgB;
 var origDepthB;
 var gameCounter = 0;
-var numGames;
+var totNumGames;
 
 var playMultipleGames = function (algW, depthW, algB, depthB, nGames){
   origAlgW = algW;
@@ -133,7 +133,7 @@ var playMultipleGames = function (algW, depthW, algB, depthB, nGames){
   origAlgB = algB;
   origDepthB = depthB;
   gameCounter = 0;
-  numGames = nGames;
+  totNumGames = nGames;
   
   gameLoop(algW, depthW, algB, depthB);
 }
@@ -172,13 +172,13 @@ var gameLoop = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     gameDataArray.push(thisGameData);
      
     //start new game
-    if (continuePlaying && gameCounter < numGames){
+    if (continuePlaying && gameCounter < totNumGames){
       resetBoard();
       gameLoop(origAlgW, origDepthW, origAlgB, origDepthB);
       console.log('Resetting, starting game ' + (gameCounter + 1));
     } else {
-       console.log('Finished game loop');
-       alert('Finished all games');
+       console.log('Finished game loop ' + totNumGames);
+       alert('Finished ' + gameCounter + ' games');
        continuePlaying = true;
        gameCounter = 0;
     }
