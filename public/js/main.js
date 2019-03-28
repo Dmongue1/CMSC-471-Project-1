@@ -2,6 +2,8 @@ var gameDataArray = [
   //starts empty, elements added on gameover in playGame()
 ];
 
+var continuePlaying = true;
+
 // Computer makes a move with algorithm choice and skill/depth level
 var makeMove = function(algo, skill=3) {
   // exit if the game is over
@@ -117,22 +119,29 @@ var playGame = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   }, 250);
 };
 
+var origAlgW;
+var origDepthW;
+var origAlgB;
+var origDepthB;
+var gameCounter = 0;
+var numGames;
+
+var playMultipleGames = function (algW, depthW, algB, depthB, nGames){
+  origAlgW = algW;
+  origDepthW = depthW;
+  origAlgB = algB;
+  origDepthB = depthB;
+  gameCounter = 0;
+  numGames = nGames;
+  
+  playGameLoop(algW, depthW, algB, depthB);
+}
 
 //intended to play multiple games in a row, note: normal loops don't work due to playGame's recursion, need to figure out a workaround
-var playMultipleGames = function(alg1, depth1, alg2, depth2, numGames){
+var playGameLoop = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   
-  for (var i = 0; i < numGames; i++){
-    resetBoard();
-    //window.setTimeout(function() {
-      playGameFast(alg1, depth1, alg2, depth2);
-    //}, 250);
-  }
-  
-};
-
-var playGameFast = function(algoW=1, skillW=2, algoB=1, skillB=2) {
-  
-  if (game.game_over() === true) {
+   if (game.game_over() === true) {
+    gameCounter++;
     console.log('Game Over');
     console.log('White: algo=' + algoW + ' skill=' + skillW);
     console.log('Black: algo=' + algoB + ' skill=' + skillB);
@@ -160,6 +169,12 @@ var playGameFast = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     
     //add object to array
     gameDataArray.push(thisGameData);
+     
+    //start new game
+    if (continuePlaying && gameCounter < numGames){
+      resetBoard();
+      
+    }
     
     return;
   }
@@ -213,34 +228,14 @@ var playGameFast = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   var skill = game.turn() === 'w' ? skillW : skillB;
   var algo = game.turn() === 'w' ? algoW : algoB;
   makeMove(algo, skill);
-  
-  //window.setTimeout(function() {
-    playGameFast(algoW, skillW, algoB, skillB);
-  //});
+  window.setTimeout(function() {
+    playGameLoop(algoW, skillW, algoB, skillB);
+  }, 250);
   
 };
 
-
-// Handles what to do after human makes move.
-// Computer automatically makes next move
-var onDrop = function(source, target) {
-  // see if the move is legal
-  var move = game.move({
-    from: source,
-    to: target,
-    promotion: 'q' // NOTE: always promote to a queen for example simplicity
-  });
-
-  // If illegal move, snapback
-  if (move === null) return 'snapback';
-
-  // Log the move
-  console.log(move)
-
-  // make move for black
-  //window.setTimeout(function() {
-    makeMoveFast(1, 3);
-  //}, 250);
+var stopPlaying = function(){
+  continuePlaying = false;
 };
 
 var resetBoard = function(){
