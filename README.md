@@ -16,9 +16,6 @@ Implemented looping
  - added in 'all games finished' popup in gameLoop
  
  - 'end after current game' button for loop
-  
-Goals: 
- - fields/buttons to play single or multiple games
 
 # Chess AI
 A chess AI, with with different algorithms of increasing intelligence.
