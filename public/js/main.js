@@ -124,7 +124,7 @@ var origAlgW;
 var origDepthW;
 var origAlgB;
 var origDepthB;
-var gameCounter = 0;
+var gameCount = 0;
 var totNumGames;
 
 var playMultipleGames = function (algW, depthW, algB, depthB, nGames){
@@ -132,7 +132,7 @@ var playMultipleGames = function (algW, depthW, algB, depthB, nGames){
   origDepthW = depthW;
   origAlgB = algB;
   origDepthB = depthB;
-  gameCounter = 0;
+  gameCount = 0;
   totNumGames = nGames;
   
   gameLoop(algW, depthW, algB, depthB);
@@ -142,7 +142,7 @@ var playMultipleGames = function (algW, depthW, algB, depthB, nGames){
 var gameLoop = function(algoW=1, skillW=2, algoB=1, skillB=2) {
   
    if (game.game_over() === true) {
-    gameCounter++;
+    gameCount++;
     console.log('Game Over');
     console.log('White: algo=' + algoW + ' skill=' + skillW);
     console.log('Black: algo=' + algoB + ' skill=' + skillB);
@@ -172,15 +172,15 @@ var gameLoop = function(algoW=1, skillW=2, algoB=1, skillB=2) {
     gameDataArray.push(thisGameData);
      
     //start new game
-    if (continuePlaying && gameCounter < totNumGames){
+    if (continuePlaying && gameCount < totNumGames){
       resetBoard();
       gameLoop(origAlgW, origDepthW, origAlgB, origDepthB);
-      console.log('Resetting, starting game ' + (gameCounter + 1));
+      console.log('Resetting, starting next game.');
     } else {
        console.log('Finished game loop ' + totNumGames);
-       alert('Finished ' + gameCounter + ' games');
+       alert('Finished ' + gameCount + ' games');
        continuePlaying = true;
-       gameCounter = 0;
+       gameCount = 0;
     }
     
     return;
