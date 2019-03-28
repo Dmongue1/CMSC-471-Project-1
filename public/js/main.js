@@ -9,6 +9,7 @@ var makeMove = function(algo, skill=3) {
   // exit if the game is over
   if (game.game_over() === true) {
     console.log('Game Over');
+    alert('Game Over');
     return;
   }
   // Calculate the best move, using chosen algorithm
@@ -177,6 +178,7 @@ var gameLoop = function(algoW=1, skillW=2, algoB=1, skillB=2) {
       console.log('Resetting, starting game ' + (gameCounter + 1));
     } else {
        console.log('Finished game loop');
+      alert('Finished all games');
     }
     
     return;
