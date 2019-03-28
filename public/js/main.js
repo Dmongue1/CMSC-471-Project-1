@@ -180,6 +180,7 @@ var gameLoop = function(algoW=1, skillW=2, algoB=1, skillB=2) {
        console.log('Finished game loop');
        alert('Finished all games');
        continuePlaying = true;
+       gameCounter = 0;
     }
     
     return;
