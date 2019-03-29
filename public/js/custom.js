@@ -14,8 +14,8 @@ var evaluateBoard3 = function(board, color) {
         value += getPieceVal(board[i][j], color);
         value += getLocationValue(board[i][j], color, i ,j);
       }
-    });
-  });
+    }
+  }
 
   return value;
 };
