@@ -106,7 +106,7 @@ var genMove = function(depth, game, playerColor,
   // Search through all possible moves
   for (var i = 0; i < possibleMoves.length; i++) {
     var move = possibleMoves[i];
-    console.log(possibleMoves[i].color + ' ' + possibleMoves[i].piece + ' ' + possibleMoves[i].from);
+    console.log(possibleMoves[i]);
     console.log(move.color + ' ' + move.piece + ' ' + move.from);
     
     // Make the move, but undo before exiting loop
