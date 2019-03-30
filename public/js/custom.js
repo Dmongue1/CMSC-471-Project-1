@@ -106,9 +106,12 @@ var genMove = function(depth, game, playerColor,
   // Search through all possible moves
   for (var i = 0; i < possibleMoves.length; i++) {
     var move = possibleMoves[i];
+    console.log(possibleMoves[i].color + ' ' + possibleMoves[i].piece + ' ' + possibleMoves[i].from);
     console.log(move.color + ' ' + move.piece + ' ' + move.from);
+    
     // Make the move, but undo before exiting loop
     game.move(move);
+    
     // Recursively get the value from this move
     value = genMove(depth-1, game, playerColor, alpha, beta, !isMaximizingPlayer)[0];
     value += getHeatValue(game, game.board(), move, playerColor, value);    
