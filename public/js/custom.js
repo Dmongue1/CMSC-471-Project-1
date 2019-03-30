@@ -97,7 +97,7 @@ var genMove = function(depth, game, playerColor,
 
   // Recursive case: search possible moves
   var bestMove1 = null; // best move not set yet
-  var possibleMoves = game.moves({verobse : true});
+  var possibleMoves = game.generate_moves({verobse : true});
   // Set random order for possible moves
   possibleMoves.sort(function(a, b){return 0.5 - Math.random()});
   // Set a default best move value
@@ -107,7 +107,7 @@ var genMove = function(depth, game, playerColor,
   for (var i = 0; i < possibleMoves.length; i++) {
     var move = possibleMoves[i];
     console.log(possibleMoves[i]);
-    console.log(move.color + ' ' + move.piece + ' ' + move.from);
+    console.log(possibleMoves[i].color + ' ' + possibleMoves[i].piece + ' ' + possibleMoves[i].from);
     
     // Make the move, but undo before exiting loop
     game.move(move);
