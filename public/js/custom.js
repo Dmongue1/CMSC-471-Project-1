@@ -68,6 +68,8 @@ var getHeatValue = function(game, board, move, playerColor, value) {
     // find friendly "defending" moves by subtracting attacking moves from total moves
     var defendingPieces = (game.moves({square:move.to}).length) - attackingPieces;
     var pieceToMove = game.get(move.from);
+    console.log(move.from);
+    console.log(pieceToMove);
     console.log(pieceToMove.type);
     console.log(pieceToMove.color);
     game.put(pieceToMove, move.to);
