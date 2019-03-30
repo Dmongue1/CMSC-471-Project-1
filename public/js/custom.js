@@ -14,8 +14,8 @@ var evaluateBoard3 = function(board, color) {
         value += getPieceVal(board[i][j], color);
         value += getLocationValue(board[i][j], color, i ,j);
       }
-    });
-  });
+    }
+  }
 
   return value;
 };
@@ -32,7 +32,7 @@ var getPieceVal = function (piece, color) {
     'k': 10000
   };
   return pieceValue[piece['type']] * (piece['color'] === color ? 1 : -1);
-}
+};
 
 // Contributes the value of a piece at the square specified
 // Relies on a series of tables modified from script.js (algorithm 2)
@@ -56,6 +56,20 @@ var getLocationValue = function (piece, color, x, y) {
 
     var locVal = checkTables(piece.type, piece.color === 'w', x ,y);
     return piece.color === color ? locVal : -locVal;
+};
+
+// Generate all moves that attack and defend a given move and assign a value from this
+var getHeatValue = function(game, board, move, playerColor, value) {
+    // friendly pieces can't move on top of each other, so this gets attacking pieces
+    var attackingPieces = game.moves({square: move.to}).length;
+    
+    // remove the piece so friendly pieces can now move to that square
+    game.remove(move.to);
+    // find friendly "defending" moves by subtracting attacking moves from total moves
+    var defendingPieces = (game.moves({square:move.to}).length) - attackingPieces;
+    game.put(move.piece, move.to);
+
+    return (defendingPieces - attackingPieces) * (value/10);
 };
 
 /**
@@ -93,6 +107,7 @@ var genMove = function(depth, game, playerColor,
     game.move(move);
     // Recursively get the value from this move
     value = genMove(depth-1, game, playerColor, alpha, beta, !isMaximizingPlayer)[0];
+    value += getHeatValue(game, game.board(), move, playerColor, value);    
 
     // Undo previous move
     game.undo();
@@ -127,7 +142,7 @@ var genMove = function(depth, game, playerColor,
   console.log('Depth: ' + depth + ' | Best Move: ' + bestMove1 + ' | ' + bestMoveValue + ' | A: ' + alpha + ' | B: ' + beta);
   // Return the best move, or the only move
   return [bestMoveValue, bestMove1 || possibleMoves[0]];
-}
+};
 
 // Locational data
 var reverseArr = function(array) {
