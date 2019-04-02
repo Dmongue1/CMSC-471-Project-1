@@ -58,7 +58,6 @@ var getLocationValue = function (piece, color, x, y) {
     return piece.color === color ? locVal : -locVal;
 };
 
-<<<<<<< HEAD
 // Generate all moves that attack and defend a given move and assign a value from this
 // The move is assumed to already have been performed before this function is called,
 // so move.to is used instead of move.from.
