@@ -59,15 +59,22 @@ var getLocationValue = function (piece, color, x, y) {
 };
 
 // Generate all moves that attack and defend a given move and assign a value from this
-var getHeatValue = function(game, board, move, playerColor, value) {
+// The move is assumed to already have been performed before this function is called,
+// so move.to is used instead of move.from.
+// move.piece can't be used, as that returns a compressed char instead of an object
+var getHeatValue = function(game, board, move, value) {
+    // prevent repeatedly accessing move.to
+    var location = move.to;
     // friendly pieces can't move on top of each other, so this gets attacking pieces
-    var attackingPieces = game.moves({square: move.to}).length;
+    var attackingPieces = game.moves({square: location}).length;
     
-    // remove the piece so friendly pieces can now move to that square
-    game.remove(move.to);
+    // save and remove the piece so friendly pieces can now move to that square
+    var piece = game.get(location);
+    game.remove(location);
+
     // find friendly "defending" moves by subtracting attacking moves from total moves
-    var defendingPieces = (game.moves({square:move.to}).length) - attackingPieces;
-    game.put(move.piece, move.to);
+    var defendingPieces = (game.moves({square: location}).length) - attackingPieces;
+    game.put(piece, location);
 
     return (defendingPieces - attackingPieces) * (value/10);
 };
@@ -94,7 +101,7 @@ var genMove = function(depth, game, playerColor,
 
   // Recursive case: search possible moves
   var bestMove1 = null; // best move not set yet
-  var possibleMoves = game.moves();
+  var possibleMoves = game.moves({verbose:true});
   // Set random order for possible moves
   possibleMoves.sort(function(a, b){return 0.5 - Math.random()});
   // Set a default best move value
@@ -107,7 +114,7 @@ var genMove = function(depth, game, playerColor,
     game.move(move);
     // Recursively get the value from this move
     value = genMove(depth-1, game, playerColor, alpha, beta, !isMaximizingPlayer)[0];
-    value += getHeatValue(game, game.board(), move, playerColor, value);    
+    value += getHeatValue(game, game.board(), move, value);    
 
     // Undo previous move
     game.undo();
