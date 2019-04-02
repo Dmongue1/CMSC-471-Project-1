@@ -1,19 +1,21 @@
-v2 notes:
-Editing main.js
+Looper Notes:
 
-Goals of this edit: 
- - Add re-randomization if randomized players end up identical
-   * booleans to exclude user-specified values from re-randomization
-   * Looped re-randomizer in case re-randomized values end up being identical to the pre-randomization values
- - Add end-game check to see who won or if it was a stalemate
-   * End game check correctly shows who won based on who took the final turn
-   * Stalemate/draw check added
- - Add turn counter
-   * Number of turns determined by the length of the move history array at the end of the game.
+Implemented looping
+ - initiated by playMultipleGames which takes 5 user inputs: algos for both, skills for both, number of games to play
+   * records user inputs in global variables that can be accessed by gameLoop
+   * initializes game counter
+ 
+ - calls gameLoop
+   * basically just playGame but has a chunk in the game over section that resets board and starts new game with global variables as initial values
+   * increments game counter on game over
+   * only starts new game if game counter is less than the numbers of games asked for by user
+   * only starts new game if boolean 'continue playing' variable is true (meant to be used via button to halt loop)
    
-Post-merge adjustments:
- - Added eval_2 functionality to re-randomizer
- - Added 'edit this' marker comments to the algo rngs to make them easier to find in the code once eval_3 is implemented
+ - commented out game over alert popup from elsewhere, moved it into single-game playGame function
+ 
+ - added in 'all games finished' popup in gameLoop
+ 
+ - 'end after current game' button for loop
 
 # Chess AI
 A chess AI, with with different algorithms of increasing intelligence.
@@ -149,3 +151,40 @@ Testing comments:
  - playGame(1,1,1,1) seems to also work, less CPU intensive due to the shallower depth
  - playGame(1,3,1,3) also works, although was very slow and CPU intensive due to the high depth. Took about 10 minutes to complete.
  - playGame(1,0,1,0) works too, randomization seemes to be working as intended. White got a skill=3, Black got a skill=1. It was interesting seeing the difference in response times and strength of play.
+
+v2 notes:
+Editing main.js
+
+Goals of this edit: 
+ - Add re-randomization if randomized players end up identical
+   * booleans to exclude user-specified values from re-randomization
+   * Looped re-randomizer in case re-randomized values end up being identical to the pre-randomization values
+ - Add end-game check to see who won or if it was a stalemate
+   * End game check correctly shows who won based on who took the final turn
+   * Stalemate/draw check added
+ - Add turn counter
+   * Number of turns determined by the length of the move history array at the end of the game.
+   
+Post-merge adjustments:
+ - Added eval_2 functionality to re-randomizer
+ - Added 'edit this' marker comments to the algo rngs to make them easier to find in the code once eval_3 is implemented
+ 
+ File Writer notes;
+
+Goal: to allow the game to write relevant data to an output file once a game is completed.
+
+Note: It looks like there isn't a way to do this directly (due to javascript's built in security protocols), so I'm looking into building in some sort of code that would build a csv file and allow it to be downloaded, as well as adding a 'reset game' button to the html so that multiple games could be run without needing to reload everything from scratch (which would toss out the saved data).
+
+ - Added in a reset button that resets the game and game board
+   * resets game and board without clearing out data file (see below)
+ 
+ - Added in button to dowload a csv file with the data from the games run on that instance
+   * builds csv file from an array
+   * downloads/displays csv file
+   * added empty global array to track game results
+   * game data objects added at end of each game
+   
+   
+Next objectives:
+ - Add in buttons to play single game to html, with input fields for algos and skills
+ - Add in function that loops playGame() with specified parameters for a specified number of times without needing any human interaction

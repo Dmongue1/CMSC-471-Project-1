@@ -193,7 +193,7 @@ var getPieceValue = function (piece, color, x, y) {
 var positionCount;
 var getBestMove = function (skill, game, color) {
     if (game.game_over()) {
-        alert('Game over');
+        //alert('Game over');
     }
 
     positionCount = 0;
