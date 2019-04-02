@@ -63,7 +63,7 @@ var getLocationValue = function (piece, color, x, y) {
 // The move is assumed to already have been performed before this function is called,
 // so move.to is used instead of move.from.
 // move.piece can't be used, as that returns a compressed char instead of an object
-var getHeatValue = function(game, move, value) {
+var getHeatValue = function(game, board, move, value) {
     // prevent repeatedly accessing move.to
     var location = move.to;
     // friendly pieces can't move on top of each other, so this gets attacking pieces
@@ -79,6 +79,24 @@ var getHeatValue = function(game, move, value) {
 
     return (defendingPieces - attackingPieces) * (value/10);
 };
+=======
+var getHeatValue = function (game, move, color) {
+    // Finds how many moves can capture where the piece just moved
+    var numCaptureMoves = game.generate_moves({square: move.to}).length;
+
+    // Removes the piece so same color pieces can move to the square
+    var pieceChecked = game.get(move.to);
+    game.remove(move.to);
+
+    // Finds how many pieces are "defending" the piece that just moved
+    var numDefending = game.generate_moves({square: move.to}).length;
+    
+    // Replaces the piece that was removed
+    game.put(pieceChecked, move.to);
+
+    return (numDefending - numCaptureMoves) * (getPieceVal(pieceChecked, color) * 0.1);
+}
+>>>>>>> master
 
 /**
  * Calculates the best move using Minimax with Alpha Beta Pruning.
@@ -115,10 +133,14 @@ var genMove = function(depth, game, playerColor,
     game.move(move);
     // Recursively get the value from this move
     value = genMove(depth-1, game, playerColor, alpha, beta, !isMaximizingPlayer)[0];
-    value += getHeatValue(game, move, value);    
+<<<<<<< HEAD
+    value += getHeatValue(game, game.board(), move, value);    
 
     // Undo previous move
     game.undo();
+=======
+    value += getHeatValue(game, move, playerColor);
+>>>>>>> master
 
     // Log the value of this move
     console.log(isMaximizingPlayer ? 'Max: ' : 'Min: ', depth, move, value,
@@ -139,6 +161,9 @@ var genMove = function(depth, game, playerColor,
       }
       beta = Math.min(beta, value);
     }
+
+    // Undo previous move
+    game.undo();
 
     // Check for alpha beta pruning
     if (beta <= alpha) {

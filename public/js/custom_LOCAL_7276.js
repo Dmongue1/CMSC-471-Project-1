@@ -58,12 +58,11 @@ var getLocationValue = function (piece, color, x, y) {
     return piece.color === color ? locVal : -locVal;
 };
 
-<<<<<<< HEAD
 // Generate all moves that attack and defend a given move and assign a value from this
 // The move is assumed to already have been performed before this function is called,
 // so move.to is used instead of move.from.
 // move.piece can't be used, as that returns a compressed char instead of an object
-var getHeatValue = function(game, move, value) {
+var getHeatValue = function(game, board, move, value) {
     // prevent repeatedly accessing move.to
     var location = move.to;
     // friendly pieces can't move on top of each other, so this gets attacking pieces
@@ -115,7 +114,7 @@ var genMove = function(depth, game, playerColor,
     game.move(move);
     // Recursively get the value from this move
     value = genMove(depth-1, game, playerColor, alpha, beta, !isMaximizingPlayer)[0];
-    value += getHeatValue(game, move, value);    
+    value += getHeatValue(game, game.board(), move, value);    
 
     // Undo previous move
     game.undo();

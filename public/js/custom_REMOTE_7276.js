@@ -32,7 +32,7 @@ var getPieceVal = function (piece, color) {
     'k': 10000
   };
   return pieceValue[piece['type']] * (piece['color'] === color ? 1 : -1);
-};
+}
 
 // Contributes the value of a piece at the square specified
 // Relies on a series of tables modified from script.js (algorithm 2)
@@ -58,27 +58,22 @@ var getLocationValue = function (piece, color, x, y) {
     return piece.color === color ? locVal : -locVal;
 };
 
-<<<<<<< HEAD
-// Generate all moves that attack and defend a given move and assign a value from this
-// The move is assumed to already have been performed before this function is called,
-// so move.to is used instead of move.from.
-// move.piece can't be used, as that returns a compressed char instead of an object
-var getHeatValue = function(game, move, value) {
-    // prevent repeatedly accessing move.to
-    var location = move.to;
-    // friendly pieces can't move on top of each other, so this gets attacking pieces
-    var attackingPieces = game.moves({square: location}).length;
+var getHeatValue = function (game, move, color) {
+    // Finds how many moves can capture where the piece just moved
+    var numCaptureMoves = game.generate_moves({square: move.to}).length;
+
+    // Removes the piece so same color pieces can move to the square
+    var pieceChecked = game.get(move.to);
+    game.remove(move.to);
+
+    // Finds how many pieces are "defending" the piece that just moved
+    var numDefending = game.generate_moves({square: move.to}).length;
     
-    // save and remove the piece so friendly pieces can now move to that square
-    var piece = game.get(location);
-    game.remove(location);
+    // Replaces the piece that was removed
+    game.put(pieceChecked, move.to);
 
-    // find friendly "defending" moves by subtracting attacking moves from total moves
-    var defendingPieces = (game.moves({square: location}).length) - attackingPieces;
-    game.put(piece, location);
-
-    return (defendingPieces - attackingPieces) * (value/10);
-};
+    return (numDefending - numCaptureMoves) * (getPieceVal(pieceChecked, color) * 0.1);
+}
 
 /**
  * Calculates the best move using Minimax with Alpha Beta Pruning.
@@ -102,7 +97,7 @@ var genMove = function(depth, game, playerColor,
 
   // Recursive case: search possible moves
   var bestMove1 = null; // best move not set yet
-  var possibleMoves = game.moves({verbose:true});
+  var possibleMoves = game.moves();
   // Set random order for possible moves
   possibleMoves.sort(function(a, b){return 0.5 - Math.random()});
   // Set a default best move value
@@ -115,10 +110,7 @@ var genMove = function(depth, game, playerColor,
     game.move(move);
     // Recursively get the value from this move
     value = genMove(depth-1, game, playerColor, alpha, beta, !isMaximizingPlayer)[0];
-    value += getHeatValue(game, move, value);    
-
-    // Undo previous move
-    game.undo();
+    value += getHeatValue(game, move, playerColor);
 
     // Log the value of this move
     console.log(isMaximizingPlayer ? 'Max: ' : 'Min: ', depth, move, value,
@@ -140,6 +132,9 @@ var genMove = function(depth, game, playerColor,
       beta = Math.min(beta, value);
     }
 
+    // Undo previous move
+    game.undo();
+
     // Check for alpha beta pruning
     if (beta <= alpha) {
       console.log('Prune', alpha, beta);
@@ -150,7 +145,7 @@ var genMove = function(depth, game, playerColor,
   console.log('Depth: ' + depth + ' | Best Move: ' + bestMove1 + ' | ' + bestMoveValue + ' | A: ' + alpha + ' | B: ' + beta);
   // Return the best move, or the only move
   return [bestMoveValue, bestMove1 || possibleMoves[0]];
-};
+}
 
 // Locational data
 var reverseArr = function(array) {
